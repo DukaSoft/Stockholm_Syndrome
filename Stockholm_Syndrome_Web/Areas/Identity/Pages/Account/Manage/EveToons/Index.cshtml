@@ -1,0 +1,77 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.YourUser.IndexModel
+@{
+	ViewData["Title"] = "Profile -";
+	ViewData["ActivePage"] = ManageNavPages.EveToons;
+}
+
+<h4>Eve Toons</h4>
+@if (Model.EveCharacter.Count == 0)
+{
+	<h6 class="text-danger">( Warning: If you do not add atleast one character within 7 days, your account will be removed. )</h6>
+}
+<table class="table">
+	<thead>
+		<tr>
+			@*<th>
+					@Html.DisplayNameFor(model => model.EveCharacter[0].CharacterId)
+				</th>*@
+			<th>
+				@Html.DisplayNameFor(model => model.EveCharacter[0].CharacterName)
+			</th>
+			@*<th>
+					@Html.DisplayNameFor(model => model.EveCharacter[0].CharacterCorpId)
+				</th>*@
+			<th>
+				@Html.DisplayNameFor(model => model.EveCharacter[0].CharacterCorpName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.EveCharacter[0].CharacterRefreshToken)
+			</th>
+			@*<th>
+					@Html.DisplayNameFor(model => model.EveCharacter[0].DefaultToon)
+				</th>*@
+			<th>
+				@*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Add New Toon</a>*@
+				@if (Model.State == "Recruit")
+				{
+					<a asp-controller="EveSSO" asp-action="RecruitLogin">Add New Toon</a>
+				}
+				else
+				{
+					<a asp-controller="EveSSO" asp-action="Login">Add New Toon</a>
+				}
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.EveCharacter)
+		{
+			<tr>
+				@*<td>
+						@Html.DisplayFor(modelItem => item.CharacterId)
+					</td>*@
+				<td>
+					@Html.DisplayFor(modelItem => item.CharacterName)
+				</td>
+				@*<td>
+						@Html.DisplayFor(modelItem => item.CharacterCorpId)
+					</td>*@
+				<td>
+					@Html.DisplayFor(modelItem => item.CharacterCorpName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CharacterRefreshToken)
+				</td>
+				@*<td>
+						@Html.DisplayFor(modelItem => item.DefaultToon)
+					</td>*@
+				<td>
+					@*<a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+						<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |*@
+					<a class="text-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
