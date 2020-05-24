@@ -1,0 +1,58 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.Operations.EditModel
+
+<h4>Ops</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Ops.Id" />
+            <div class="form-group">
+                <label asp-for="Ops.OpsTime" class="control-label"></label>
+                <input asp-for="Ops.OpsTime" class="form-control" />
+                <span asp-validation-for="Ops.OpsTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Ops.StagingSystemId" hidden class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Ops.StagingSystemName" class="control-label"></label>
+                <input asp-for="Ops.StagingSystemName" class="form-control" />
+                <span asp-validation-for="Ops.StagingSystemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Ops.TargetSystemId" hidden class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Ops.TargetSystemName" class="control-label"></label>
+                <input asp-for="Ops.TargetSystemName" class="form-control" />
+                <span asp-validation-for="Ops.TargetSystemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Ops.FcId" hidden class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Ops.FcName" class="control-label"></label>
+                <input asp-for="Ops.FcName" class="form-control" />
+                <span asp-validation-for="Ops.FcName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ops.Description" class="control-label"></label>
+                <textarea asp-for="Ops.Description" class="form-control"></textarea>
+                <span asp-validation-for="Ops.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
