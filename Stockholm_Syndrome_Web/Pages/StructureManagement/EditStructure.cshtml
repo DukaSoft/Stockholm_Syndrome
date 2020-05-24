@@ -1,0 +1,29 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.StructureManagement.EditStructureModel
+
+<h4>Structure</h4>
+<hr />
+<div class="row">
+	<div class="col-md-3">
+		<form method="post">
+			<button asp-page-handler="AddRole" class="btn btn-primary">Add "Fuel Admin"</button>
+			<input type="hidden" name="id" value="@Model.Structure.Id" />
+			<input type="hidden" name="role" value="FuelAdmin" />
+		</form>
+	</div>
+	<div class="col-md-3">
+		<form method="post">
+			<button asp-page-handler="AddRole" class="btn btn-primary">Add "Fuel Manager"</button>
+			<input type="hidden" name="id" value="@Model.Structure.Id" />
+			<input type="hidden" name="role" value="FuelManager" />
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-page="./FuelLevels">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

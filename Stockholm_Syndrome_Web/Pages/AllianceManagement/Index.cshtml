@@ -1,0 +1,54 @@
+﻿@page
+@{
+	ViewData["Title"] = "Alliance Management -";
+}
+@model Stockholm_Syndrome_Web.Pages.AllianceManagement.IndexModel
+
+
+<h5 class="pt-5">Managed Corporations</h5>
+<div class="structureBorderNormal table-responsive">
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Corp[0].CorpName)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Corp[0].CorpId)
+				</th>
+				@*<th>
+						@Html.DisplayNameFor(model => model.Corp[0].AccessToken)
+					</th>*@
+				@*<th>
+						@Html.DisplayNameFor(model => model.Corp[0].RefreshToken)
+					</th>*@
+
+				<th><a asp-page="AddCorp">Add New</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Corp)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.CorpName)
+					</td>
+					<td>
+						@*@Html.DisplayFor(modelItem => item.CorpId)*@
+						<a href="https://zkillboard.com/corporation/@item.CorpId/" target="_blank" rel="noopener noreferrer">@item.CorpId</a>
+					</td>
+					@*<td>
+							@Html.DisplayFor(modelItem => item.AccessToken)
+						</td>*@
+					@*<td>
+							@Html.DisplayFor(modelItem => item.RefreshToken)
+						</td>*@
+					<td>
+						<a asp-page="./EditCorp" asp-route-id="@item.Id">Edit</a> |
+						<a class="text-danger" asp-page="./DeleteCorp" asp-route-id="@item.Id">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

@@ -17,6 +17,8 @@ namespace Stockholm_Syndrome_Web.Data
 		public DbSet<EveCharacter> EveCharacters { get; set; }
 		public DbSet<Ops> Ops { get; set; }
 		public DbSet<OpsTag> Tags { get; set; }
+		public DbSet<Structure> Structures { get; set; }
+		public DbSet<ExtractionData> ExtractionData { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{

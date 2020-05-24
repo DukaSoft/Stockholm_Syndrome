@@ -1,0 +1,224 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.StructureManagement.StructureFuelLevelsModel
+
+@if(Model.AnyLowFuelStructures())
+{
+	<div class="structureBorderWarning p-3 mb-3 table-responsive">
+		<div class="text-center">
+			<h2 class="structureTextWarning">Low Fuel</h2>
+		</div>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>
+
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Structure[0].StructureName)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Structure[0].TypeId)
+					</th>
+					<th>
+						System
+					</th>
+					@if (User.IsInRole("Admin") || User.IsInRole("Director"))
+					{
+						<th>
+							@Html.DisplayNameFor(model => model.Structure[0].RoleNeededToManage)
+						</th>
+					}
+					<th>
+						@Html.DisplayNameFor(model => model.Structure[0].FuelExpires)
+					</th>
+					<th>
+						Fuel Level
+					</th>
+					<th>
+
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.Structure)
+				{
+					if(await Model.CalcFuelDays(item.StructureId) < StructureFuelLevelsModel.LowFuelDays)
+					{
+						<tr>
+							<td>
+								@*<form method="post">
+									<button asp-page-handler="SetDestination" class="btn btn-primary mb-1 roleButton">Dest</button>
+									<input type="hidden" name="NavId" value="@item.StructureId" />
+									
+								</form>*@
+								<img src="~/images/UI/Nav.png" height="24" />
+							</td>
+							<td>
+								@{
+									var structureName = item.StructureName.Split('-')[1];
+									<text>@structureName</text>
+								}
+							</td>
+							<td>
+								@Model.GetStructureType(item.TypeId)
+							</td>
+							<td>
+								@{
+									var systemName = item.StructureName.Split('-')[0];
+									<text>@systemName</text>
+								}
+							</td>
+							@if (User.IsInRole("Admin") || User.IsInRole("Director"))
+							{
+								<td>
+									<text>@item.RoleNeededToManage</text>
+								</td>
+							}
+							<td>
+								@Model.FuelLevelToString(item)
+							</td>
+							<td>
+								<div class="progress active">
+									<div class="progress-bar @await Model.CalcFuelColor(item.StructureId) progress-bar-striped progress-bar-animated" style="width: @await Model.CalcFuelLevel(item.StructureId)%">
+										<strong class="myshadow">@await Model.FuelInDays(item.StructureId)</strong>
+									</div>
+								</div>
+							</td>
+							@if (User.IsInRole("Admin") || User.IsInRole("Director"))
+							{
+								<td>
+									<a asp-page="./EditStructure" asp-route-id="@item.Id">Edit</a> |
+									<a class="text-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+								</td>
+							}
+						</tr>
+					}
+				}
+			</tbody>
+		</table>
+	</div>
+}
+
+<div class="structureBorderNormal p-3 mb-4 table-responsive">
+	<div class="text-center">
+		<h3 class="mb-4">All Structures</h3>
+	</div>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>
+
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Structure[0].StructureName)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Structure[0].TypeId)
+				</th>
+				<th>
+					System
+				</th>
+				@if (User.IsInRole("Admin") || User.IsInRole("Director"))
+				{
+					<th>
+						@Html.DisplayNameFor(model => model.Structure[0].RoleNeededToManage)
+					</th>
+				}
+				<th>
+					@Html.DisplayNameFor(model => model.Structure[0].FuelExpires)
+				</th>
+				<th>
+					Fuel Level
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Structure)
+			{
+				<tr>
+					<td>
+						@*<form method="post">
+							<button asp-page-handler="SetDestination" class="btn btn-primary mb-1 roleButton">Dest</button>
+							<input type="hidden" name="NavId" value="@item.StructureId" />
+						</form>*@
+						<a data-toggle="modal" data-target="#SetDestModal" title="Set Destination">
+							<img src="~/images/UI/Nav.png" height="24" />
+						</a>
+					</td>
+					<td>
+						@{
+							var structureName = item.StructureName.Split('-')[1];
+							<text>@structureName</text>
+						}
+					</td>
+					<td>
+						@Model.GetStructureType(item.TypeId)
+					</td>
+					<td>
+						@{
+							var systemName = item.StructureName.Split('-')[0];
+							<text>@systemName</text>
+						}
+					</td>
+					@if (User.IsInRole("Admin") || User.IsInRole("Director"))
+					{
+						<td>
+							<text>@item.RoleNeededToManage</text>
+						</td>
+					}
+					<td>
+						@Model.FuelLevelToString(item)
+					</td>
+					<td>
+						<div class="progress active">
+							<div class="progress-bar @await Model.CalcFuelColor(item.StructureId) progress-bar-striped progress-bar-animated" style="width: @await Model.CalcFuelLevel(item.StructureId)%">
+								<strong class="myshadow">@await Model.FuelInDays(item.StructureId)</strong>
+							</div>
+						</div>
+					</td>
+					@if (User.IsInRole("Admin") || User.IsInRole("Director"))
+					{
+						<td>
+							<a asp-page="./EditStructure" asp-route-id="@item.Id">Edit</a> |
+							<a class="text-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+						</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+@*Modal*@
+<div class="modal fade" id="SetDestModal" tabindex="-1" role="dialog" aria-labelledby="SetDestModalTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="SetDestModalTitle">Set destination for</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				@* Insert User Toons Here*@
+				<div class="mb-1">
+					<form method="post">
+						<input type="hidden" name="NavId" />
+						<input type="hidden" name="character" />
+						<button type="button" asp-page-handler="SetDestination" class="btn btn-secondary w-100" data-dismiss="modal">Nataliya Barre</button>
+
+					</form>
+				</div>
+				<div>
+					
+				</div>
+			</div>
+			<div class="modal-footer">
+				[WIP]
+				@*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary">Save changes</button>*@
+			</div>
+		</div>
+	</div>
+</div>

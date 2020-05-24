@@ -21,25 +21,28 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
 					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
-							<a class="nav-link" asp-area="" asp-page="/Index">Home</a>
-						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
 							<div class="dropdown-menu" style="">
-                                @if (User.IsInRole("MemberOfAlliance"))
+								@if (User.IsInRole("MemberOfAlliance"))
 								{
-								    <a class="dropdown-item" asp-area="" asp-page="/Operations/Index">Operations</a>
+									<a class="dropdown-item" asp-area="" asp-page="/Operations/Index">Operations</a>
 								}
-								<a class="dropdown-item" href="#">Another action</a>
-								<a class="dropdown-item" href="#">Something else here</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Separated link</a>
+								@if (User.IsInRole("Admin") || User.IsInRole("FuelAdmin") || User.IsInRole("FuelManager"))
+								{
+									<a class="dropdown-item" asp-area="" asp-page="/StructureManagement/FuelLevels">Structure Fuel</a>
+								}
+								@if (User.IsInRole("Admin"))
+								{
+									<a class="dropdown-item" asp-area="" asp-page="/Management/Index">User Management</a>
+								}
+								@if (User.IsInRole("Admin"))
+								{
+									<a class="dropdown-item" asp-area="" asp-page="/AllianceManagement/Index">Alliance Management</a>
+								}
 							</div>
 						</li>
-						@*<li class="nav-item">
-			<a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
-		</li>*@
 					</ul>
                 </div>
             </div>

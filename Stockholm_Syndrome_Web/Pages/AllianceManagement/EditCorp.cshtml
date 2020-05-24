@@ -1,0 +1,45 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.AllianceManagement.EditCorpModel
+
+<h4>Corp</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="Corp.Id" />
+			<div class="form-group">
+				<label asp-for="Corp.CorpName" class="control-label"></label>
+				<h4>@Model.Corp.CorpName</h4>
+				<input type="hidden" asp-for="Corp.CorpName" class="form-control" />
+				<span asp-validation-for="Corp.CorpName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				@*<label asp-for="Corp.CorpId" class="control-label"></label>*@
+				<input type="hidden" asp-for="Corp.CorpId" class="form-control" />
+				<span asp-validation-for="Corp.CorpId" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				@*<label asp-for="Corp.AccessToken" class="control-label"></label>*@
+				<input type="hidden" asp-for="Corp.AccessToken" class="form-control" />
+				<span asp-validation-for="Corp.AccessToken" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				@*<label asp-for="Corp.RefreshToken" class="control-label"></label>*@
+				<input type="hidden" asp-for="Corp.RefreshToken" class="form-control" />
+				<span asp-validation-for="Corp.RefreshToken" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Save" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Stockholm_Syndrome_Web.Data;
+
+namespace Stockholm_Syndrome_Web.Pages.AllianceManagement
+{
+	[Authorize(Roles = "Admin")]
+	public class IndexModel : PageModel
+    {
+        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+
+        public IndexModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public IList<Corp> Corp { get;set; }
+
+        public async Task OnGetAsync()
+        {
+            Corp = await _context.Alliance.ToListAsync();
+        }
+    }
+}
