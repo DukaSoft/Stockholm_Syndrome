@@ -1,0 +1,120 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  padding-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: rgba(11, 29, 23, 0.1);
+}
+
+/* Me - Background Image*/
+body {
+    padding: 0;
+    padding-bottom: 60px;
+    margin: 0;
+    background-size: cover;
+    background-image: url(../Images/Nebula.jpg);
+}
+
+.navbar-bg {
+    background-color: #152721 !important;
+}
+
+.ss-text-red {
+    color: #DB1010;
+    font-weight: 900;
+}
+
+.ss-logo-main {
+    border-radius: 50%;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    width: 400px;
+    height: 400px;
+    text-align: center;
+    line-height: 100px;
+    box-shadow: rgba(0,0,0,0.5) 0px 0px 12px 12px;
+    margin: 20vh  auto;
+}
+
+/* Me - Fancy Borders*/
+.border-fancy {
+    background-color: #152721; /*#0B1D17; */
+    border-radius: 5px;
+    border: 2px solid black;
+    box-shadow: 4px 5px 4px rgba(40, 40, 40, 0.4);
+}
+.border-fancy a {
+    text-decoration: none;
+}
+.border-fancy-list:hover {
+    background-color: #1e4538;
+}
+h6.multiline {
+    white-space: pre-line;
+}
