@@ -56,7 +56,7 @@ namespace Stockholm_Syndrome.Controllers
 			// Create Redirect URL
 			var authURL = _client.GetAuthenticationUrl(new Uri("https://login.eveonline.com/v2/oauth/authorize"),
 				_config.Value.ClientId,
-				"publicData esi-skills.read_skills.v1 esi-ui.write_waypoint.v1",
+				"publicData esi-skills.read_skills.v1 esi-ui.write_waypoint.v1 esi-fittings.read_fittings.v1 esi-fittings.write_fittings.v1",
 				_config.Value.OurCallbackUrl,
 				"SSOLogin");
 
