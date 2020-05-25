@@ -89,6 +89,20 @@ namespace Stockholm_Syndrome_Web
 				options.User.AllowedUserNameCharacters = string.Empty;
 			});
 
+			// Make sure roles are applied so users cant access stuff if their role is removed!
+			services.Configure<SecurityStampValidatorOptions>(options =>
+			{
+				options.ValidationInterval = TimeSpan.FromMinutes(1);
+			});
+
+			services.ConfigureApplicationCookie(options =>
+			{
+				options.Cookie.Name = "Stockholm-Syndrome";
+				options.Cookie.MaxAge = TimeSpan.FromDays(14);
+				options.ExpireTimeSpan = TimeSpan.FromDays(14);
+				options.SlidingExpiration = true;
+			});
+
 			services.AddRazorPages();
 		}
 
