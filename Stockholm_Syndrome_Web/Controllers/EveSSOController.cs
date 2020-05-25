@@ -205,6 +205,10 @@ namespace Stockholm_Syndrome.Controllers
 
 				var user = await _userManager.GetUserAsync(User);
 
+				// ToDo: Make sure user isnt null
+				//       If the EveCharacter is already on the list
+				//       And the user is the same, update it.
+
 				await _context.EveCharacters.AddAsync(new EveCharacter
 				{
 					User = user,
