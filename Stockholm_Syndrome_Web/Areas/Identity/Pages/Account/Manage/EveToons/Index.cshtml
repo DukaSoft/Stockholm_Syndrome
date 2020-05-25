@@ -33,14 +33,14 @@
 				</th>*@
 			<th>
 				@*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Add New Toon</a>*@
-				@if (Model.State == "Recruit")
+				@*@if (Model.State == "Recruit")
 				{
 					<a asp-controller="EveSSO" asp-action="RecruitLogin">Add New Toon</a>
 				}
 				else
-				{
+				{*@
 					<a asp-controller="EveSSO" asp-action="Login">Add New Toon</a>
-				}
+				@*}*@
 			</th>
 		</tr>
 	</thead>

@@ -64,19 +64,19 @@ namespace Stockholm_Syndrome.Controllers
 			return Redirect(authURL);
 		}
 
-		[Route("EveSSO/Recruit")]
-		public IActionResult RecruitLogin()
-		{
-			// Create Redirect URL
-			var authURL = _client.GetAuthenticationUrl(new Uri("https://login.eveonline.com/v2/oauth/authorize"),
-				_config.Value.ClientId,
-				"publicData esi-skills.read_skills.v1 esi-ui.write_waypoint.v1",
-				_config.Value.OurCallbackUrl,
-				"Recruitment");
+		//[Route("EveSSO/Recruit")]
+		//public IActionResult RecruitLogin()
+		//{
+		//	// Create Redirect URL
+		//	var authURL = _client.GetAuthenticationUrl(new Uri("https://login.eveonline.com/v2/oauth/authorize"),
+		//		_config.Value.ClientId,
+		//		"publicData esi-skills.read_skills.v1 esi-ui.write_waypoint.v1",
+		//		_config.Value.OurCallbackUrl,
+		//		"Recruitment");
 
-			// Redirect to CCP SSO
-			return Redirect(authURL);
-		}
+		//	// Redirect to CCP SSO
+		//	return Redirect(authURL);
+		//}
 
 		/// <summary>
 		/// Used when adding a new managed corporation to the database
@@ -119,19 +119,19 @@ namespace Stockholm_Syndrome.Controllers
 				return NotFound();
 
 			}
-			else if (state == "Recruitment")
-			{
-				// This is a normal SSO Login from a user with Recruitment
-				if (await SSOLogin(code) == true)
-				{
-					await _signInManager.SignInAsync(await _userManager.GetUserAsync(User), false);
-					// Return the user to Home
-					return LocalRedirect("/Enlist");
-				}
+			//else if (state == "Recruitment")
+			//{
+			//	// This is a normal SSO Login from a user with Recruitment
+			//	if (await SSOLogin(code) == true)
+			//	{
+			//		await _signInManager.SignInAsync(await _userManager.GetUserAsync(User), false);
+			//		// Return the user to Home
+			//		return LocalRedirect("/Enlist");
+			//	}
 
-				// Something went wrong!
-				return NotFound();
-			}
+			//	// Something went wrong!
+			//	return NotFound();
+			//}
 			else if (state == "SSOAddCorp")
 			{
 				if (await SSOAddCorp(code) == true)
