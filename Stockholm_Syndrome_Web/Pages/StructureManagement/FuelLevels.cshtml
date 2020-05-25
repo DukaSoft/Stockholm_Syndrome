@@ -1,7 +1,9 @@
 ﻿@page
 @model Stockholm_Syndrome_Web.Pages.StructureManagement.StructureFuelLevelsModel
-
-@if(Model.AnyLowFuelStructures())
+@{
+	ViewData["Title"] = "Structure Management -";
+}
+@if (Model.AnyLowFuelStructures())
 {
 	<div class="structureBorderWarning p-3 mb-3 table-responsive">
 		<div class="text-center">
@@ -42,15 +44,15 @@
 			<tbody>
 				@foreach (var item in Model.Structure)
 				{
-					if(await Model.CalcFuelDays(item.StructureId) < StructureFuelLevelsModel.LowFuelDays)
+					if (await Model.CalcFuelDays(item.StructureId) < StructureFuelLevelsModel.LowFuelDays)
 					{
 						<tr>
 							<td>
 								@*<form method="post">
-									<button asp-page-handler="SetDestination" class="btn btn-primary mb-1 roleButton">Dest</button>
-									<input type="hidden" name="NavId" value="@item.StructureId" />
-									
-								</form>*@
+										<button asp-page-handler="SetDestination" class="btn btn-primary mb-1 roleButton">Dest</button>
+										<input type="hidden" name="NavId" value="@item.StructureId" />
+
+									</form>*@
 								<img src="~/images/UI/Nav.png" height="24" />
 							</td>
 							<td>
@@ -139,9 +141,9 @@
 				<tr>
 					<td>
 						@*<form method="post">
-							<button asp-page-handler="SetDestination" class="btn btn-primary mb-1 roleButton">Dest</button>
-							<input type="hidden" name="NavId" value="@item.StructureId" />
-						</form>*@
+								<button asp-page-handler="SetDestination" class="btn btn-primary mb-1 roleButton">Dest</button>
+								<input type="hidden" name="NavId" value="@item.StructureId" />
+							</form>*@
 						<a data-toggle="modal" data-target="#SetDestModal" title="Set Destination">
 							<img src="~/images/UI/Nav.png" height="24" />
 						</a>
@@ -211,13 +213,13 @@
 					</form>
 				</div>
 				<div>
-					
+
 				</div>
 			</div>
 			<div class="modal-footer">
 				[WIP]
 				@*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary">Save changes</button>*@
+					<button type="button" class="btn btn-primary">Save changes</button>*@
 			</div>
 		</div>
 	</div>

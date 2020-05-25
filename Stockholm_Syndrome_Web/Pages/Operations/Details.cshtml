@@ -1,9 +1,11 @@
 ﻿@page
 @model Stockholm_Syndrome_Web.Pages.Operations.DetailsModel
-
+@{
+	ViewData["Title"] = "Operations - ";
+}
 <div>
-    <h4>Ops</h4>
-    <hr />
+	<h4>Ops</h4>
+	<hr />
 	<dl class="row border-fancy mx-md-5">
 		<dt class="col-sm-2">
 			@Html.DisplayNameFor(model => model.Ops.OpsTime)

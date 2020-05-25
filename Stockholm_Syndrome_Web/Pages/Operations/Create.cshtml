@@ -1,6 +1,8 @@
 ﻿@page
 @model Stockholm_Syndrome_Web.Pages.Operations.CreateModel
-
+@{
+	ViewData["Title"] = "Operations - ";
+}
 <h4 class="text-center">Ops</h4>
 <hr />
 <div class="container">
@@ -47,5 +49,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
