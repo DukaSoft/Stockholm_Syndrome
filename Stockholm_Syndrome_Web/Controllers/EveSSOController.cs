@@ -13,6 +13,7 @@ using Stockholm_Syndrome_Web.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
+using Serilog;
 
 namespace Stockholm_Syndrome.Controllers
 {
@@ -176,10 +177,14 @@ namespace Stockholm_Syndrome.Controllers
 		}
 
 		/// <summary>
-		/// Normal login using Eve SSO
+		/// Normal login using Eve SSO<br />
+		/// Used for adding Eve Characters to the user profile
 		/// </summary>
 		/// <param name="code">The code that gets returned to us from CCP</param>
-		/// <returns></returns>
+		/// <returns>
+		/// True if successfull<br />
+		/// Otherwise False
+		/// </returns>
 		private async Task<bool> SSOLogin(string code)
 		{
 			Tokens tokens = await _client.AuthorizeAsync(new Uri("https://login.eveonline.com/v2/oauth/token"),
@@ -205,8 +210,12 @@ namespace Stockholm_Syndrome.Controllers
 
 				var user = await _userManager.GetUserAsync(User);
 
-				// ToDo: Make sure user isnt null
-				//       If the EveCharacter is already on the list
+				if(user == null)
+				{
+					Log.Warning(new Exception("User was null"), $"The user was null for {character.CharacterName}", User);
+					return false;
+				}
+				// ToDo: If the EveCharacter is already on the list
 				//       And the user is the same, update it.
 
 				await _context.EveCharacters.AddAsync(new EveCharacter
