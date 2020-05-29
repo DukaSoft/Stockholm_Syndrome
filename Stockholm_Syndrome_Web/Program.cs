@@ -15,7 +15,11 @@ namespace Stockholm_Syndrome_Web
 		public static void Main(string[] args)
 		{
 			var configuration = new ConfigurationBuilder()
+#if DEBUG
+				.AddJsonFile("appsettings.Development.json")
+#else
 				.AddJsonFile("appsettings.json")
+#endif
 				.Build();
 
 			Log.Logger = new LoggerConfiguration()
