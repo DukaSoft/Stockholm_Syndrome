@@ -3,7 +3,110 @@
 @{
 	ViewData["Title"] = "Operations - ";
 }
+
 <div>
+	<h4 class="text-center">Ops</h4>
+	<hr />
+	<div class="Ops border-fancy border-fancy mx-md-5 mx-sm-0 my-md-1 p-2">
+		<div class="row">
+			@*Times*@
+			<div class="col-md-3">
+				<div class="row">
+					<div class="col">
+						<h6>EvE Time</h6>
+					</div>
+					<div class="col">
+						<h6 class="EvETime">@Model.Ops.OpsTime.ToString("yyyy/MM/dd HH:mm:ss")</h6>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<div class="col">
+						<h6>Local Time</h6>
+					</div>
+					<div class="col">
+						<h6 id="0">Calculating Local Time</h6>
+					</div>
+				</div>
+			</div>
+			@*<div class="col-md-2">
+
+				</div>*@
+			<div class="col-md-3 ">
+				@*Countdown*@
+				<h4 class="text-center" id="0 cd">Initializing</h4>
+			</div>
+			<div class="col-md-6">
+				@*Tags*@
+				<h6>Tags - Comming soon™</h6>
+			</div>
+		</div>
+		<div class="row">
+			@*Systems*@
+			<div class="col-md-3">
+				<div class="row">
+					<div class="col">
+						<h6>Staging System</h6>
+					</div>
+					<div class="col">
+						<h6>@Model.Ops.StagingSystemName</h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<h6>Target System</h6>
+					</div>
+					<div class="col">
+						<h6>@Model.Ops.TargetSystemName</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				@*FC*@
+				<h6>FC</h6>
+				<h6>@Model.Ops.FcName</h6>
+			</div>
+			@*<div class="col-md-3">
+
+				</div>*@
+			<div class="col-md-7">
+				@*Description*@
+				<h6>Description</h6>
+				<h6 class="multiline">@Model.Ops.Description</h6>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h6 class="text-right">Created by</h6>
+				<h6 class="text-right">@Model.Ops.Creator.DiscordName</h6>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 text-center">
+				@{
+					if (User.IsInRole("OpsManager"))
+					{
+						<a asp-page="./Delete" asp-route-id="@Model.Ops.Id" class="btn btn-danger m-2" style="width:200px">Delete</a>
+						<a asp-page="./Edit" asp-route-id="@Model.Ops.Id" class="btn btn-primary m-2" style="width:200px">Edit</a>
+					}
+					else if (Model.Ops.Creator != null)
+					{
+						if (Model.Ops.Creator == User.Identity)
+						{
+							<a asp-page="./Delete" asp-route-id="@Model.Ops.Id" class="btn btn-danger m-2" style="width:200px">Delete</a>
+							<a asp-page="./Edit" asp-route-id="@Model.Ops.Id" class="btn btn-primary m-2" style="width:200px">Edit</a>
+						}
+					}
+				}
+				<a asp-page="./Index" class="btn btn-primary m-2">Back</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="~/js/LocalTime.js"></script>
+<script src="~/js/Countdown.js"></script>
+
+@*<div>
 	<h4>Ops</h4>
 	<hr />
 	<dl class="row border-fancy mx-md-5">
@@ -71,4 +174,4 @@
 		}
 	}
 	<a asp-page="./Index">Back to List</a>
-</div>
+</div>*@
