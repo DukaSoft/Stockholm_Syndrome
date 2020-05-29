@@ -162,6 +162,7 @@ namespace Stockholm_Syndrome.Controllers
 			}
 			catch (Exception e)
 			{
+				Log.Error("Error trying to update corp Id's");
 				return BadRequest(e);
 			}
 			try
@@ -170,6 +171,7 @@ namespace Stockholm_Syndrome.Controllers
 			}
 			catch (Exception e)
 			{
+				Log.Error("Error trying to update user roles");
 				return BadRequest(e);
 			}
 
@@ -279,14 +281,21 @@ namespace Stockholm_Syndrome.Controllers
 				StringContent payload = new StringContent(characterIdsJson);
 
 				var response = await _httpClient.PostAsync("https://esi.evetech.net/latest/characters/affiliation/", payload);
+
+				if(!response.IsSuccessStatusCode)
+				{
+					// Bad stuff has happend
+					Log.Information("Error getting affiliations from ESI {@response}", response);
+					return;
+				}
 				string responseBody = await response.Content.ReadAsStringAsync();
 
-				var data = JsonConvert.DeserializeObject<dynamic>(responseBody);
+				var affiliationData = JsonConvert.DeserializeObject<dynamic>(responseBody);
 
 				// /universe/names/ - for corp names
 				List<dynamic> corpIds = new List<dynamic>();
 				List<dynamic> uniqueCorpIds = new List<dynamic>();
-				foreach (var item in data)
+				foreach (var item in affiliationData)
 				{
 					corpIds.Add(item.corporation_id);
 				}
@@ -297,14 +306,19 @@ namespace Stockholm_Syndrome.Controllers
 				var corpIdsJson = JsonConvert.SerializeObject(uniqueCorpIds.ToArray());
 				payload = new StringContent(corpIdsJson);
 				response = await _httpClient.PostAsync("https://esi.evetech.net/latest/universe/names/", payload);
+				if(!response.IsSuccessStatusCode)
+				{
+					Log.Information("Error getting corp names from ESI {@response}", response);
+					return;
+				}
 				responseBody = await response.Content.ReadAsStringAsync();
-				var data2 = JsonConvert.DeserializeObject<dynamic>(responseBody);
+				var corpNames = JsonConvert.DeserializeObject<dynamic>(responseBody);
 
-				if (data2 == null)
+				if (corpNames == null)
 				{
 					return;
 				}
-				foreach (var item in data)
+				foreach (var item in affiliationData)
 				{
 					CharacterData toon = new CharacterData
 					{
@@ -319,14 +333,11 @@ namespace Stockholm_Syndrome.Controllers
 					eveCharacter.CharacterCorpId = toon.corporation_id;
 					eveCharacter.CharacterAllianceId = toon.alliance_id;
 
-
-					// Is not the same 
-					foreach (var item2 in data2)
+					foreach (var corpItem in corpNames)
 					{
-						// Error here?
-						if (item2.id == eveCharacter.CharacterCorpId)
+						if (corpItem.id == eveCharacter.CharacterCorpId)
 						{
-							eveCharacter.CharacterCorpName = item2.name;
+							eveCharacter.CharacterCorpName = corpItem.name;
 							_context.EveCharacters.Update(eveCharacter);
 						}
 					}
