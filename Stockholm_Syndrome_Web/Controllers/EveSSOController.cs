@@ -250,10 +250,14 @@ namespace Stockholm_Syndrome.Controllers
 
 			if (checkUser == null)
 			{
+				var characters = _context.EveCharacters.Include(u => u.User).ToList();
 				// Check all users
-				foreach (var character in _context.EveCharacters)
+				foreach (var character in characters)
 				{
-					CharacterIds.Add(character.CharacterId);
+					if(character.User != null)
+					{
+						CharacterIds.Add(character.CharacterId);
+					}
 				}
 			}
 			else

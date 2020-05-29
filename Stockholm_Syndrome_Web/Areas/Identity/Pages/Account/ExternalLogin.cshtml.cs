@@ -135,7 +135,7 @@ namespace Stockholm_Syndrome_Web.Areas.Identity.Pages.Account
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
-                        _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+                        _logger.LogInformation("User {UserID} {Username} created an account using {Name} provider.",user.Id, user.UserName, info.LoginProvider);
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
                         //if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -143,7 +143,7 @@ namespace Stockholm_Syndrome_Web.Areas.Identity.Pages.Account
                         //    return RedirectToPage("./RegisterConfirmation", new { Email = Input.Email });
                         //}
 
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        await _signInManager.SignInAsync(user, isPersistent: true);
                         //var userId = await _userManager.GetUserIdAsync(user);
                         //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                         //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using Stockholm_Syndrome_Web.Data;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations
@@ -65,7 +66,7 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
                 _context.Ops.Remove(Ops);
                 await _context.SaveChangesAsync();
 
-                _logger.LogInformation("Ops Deleted", Ops);
+                Log.Information("Ops {@Ops} Deleted by {Username}", Ops, User.Identity.Name);
             }
 
             return RedirectToPage("./Index");
