@@ -10,8 +10,8 @@
 {
 	<h6 class="text-danger">( Warning: If you do not add atleast one character within 7 days, your account will be removed. )</h6>
 }
-<div class="border-fancy">
-	<table class="table">
+<div class="">
+	<table class="table border-fancy">
 		<thead>
 			<tr>
 				@*<th>
@@ -40,7 +40,7 @@
 						}
 						else
 						{*@
-					<a asp-controller="EveSSO" asp-action="Login" class="btn btn-primary" style="width:200px">Add New Toon</a>
+					<a asp-controller="EveSSO" asp-action="Login" class="btn btn-primary" style="width:140px">Add New Toon</a>
 					@*}*@
 				</th>
 			</tr>
@@ -70,7 +70,7 @@
 					<td>
 						@*<a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
 							<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |*@
-						<a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id" style="width:200px">Delete</a>
+						<a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id" style="width:140px; height:35px">Delete</a>
 					</td>
 				</tr>
 			}
