@@ -117,7 +117,7 @@ namespace Stockholm_Syndrome.Controllers
 				}
 
 				// Something went wrong!
-				return NotFound();
+				return LocalRedirect("/Identity/Account/Manage/EveToons");
 
 			}
 			//else if (state == "Recruitment")
@@ -189,11 +189,20 @@ namespace Stockholm_Syndrome.Controllers
 		/// </returns>
 		private async Task<bool> SSOLogin(string code)
 		{
-			Tokens tokens = await _client.AuthorizeAsync(new Uri("https://login.eveonline.com/v2/oauth/token"),
-				_config.Value.ClientId,
-				_config.Value.ClientSecret,
-				code)
-				.ConfigureAwait(false);
+			Tokens tokens;
+			try
+			{
+				tokens = await _client.AuthorizeAsync(new Uri("https://login.eveonline.com/v2/oauth/token"),
+					_config.Value.ClientId,
+					_config.Value.ClientSecret,
+					code)
+					.ConfigureAwait(false);
+			}
+			catch(Exception e)
+			{
+				Log.Warning("Token error", e);
+				return false;
+			}
 
 			using (var _httpClient = _httpClientFactory.CreateClient())
 			{

@@ -135,7 +135,7 @@ namespace Stockholm_Syndrome_Web.Areas.Identity.Pages.Account
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
-                        _logger.LogInformation("User {UserID} {Username} created an account using {Name} provider.",user.Id, user.UserName, info.LoginProvider);
+                        _logger.LogInformation("User {UserID} {Username} created an account using {Name} provider.", user.Id, user.UserName, info.LoginProvider);
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
                         //if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -143,7 +143,10 @@ namespace Stockholm_Syndrome_Web.Areas.Identity.Pages.Account
                         //    return RedirectToPage("./RegisterConfirmation", new { Email = Input.Email });
                         //}
 
-                        await _signInManager.SignInAsync(user, isPersistent: true);
+                        //await _signInManager.SignInAsync(user, isPersistent: true, info.LoginProvider);
+                        await _signInManager.RefreshSignInAsync(user);
+                        var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+
                         //var userId = await _userManager.GetUserIdAsync(user);
                         //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                         //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -155,7 +158,14 @@ namespace Stockholm_Syndrome_Web.Areas.Identity.Pages.Account
 
                         //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                        return RedirectToPage("./Manage/EveToons/Index");
+                        if(signInResult.Succeeded)
+						{
+                            return RedirectToPage("./Manage/EveToons/Index");
+						}
+						else
+						{
+                            return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+                        }
 
                         //return LocalRedirect(returnUrl);
                     }
