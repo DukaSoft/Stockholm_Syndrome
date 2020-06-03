@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,12 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
     public class DetailsModel : PageModel
     {
         private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        public readonly UserManager<ApplicationUser> _userManager;
 
-        public DetailsModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context)
+        public DetailsModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public Ops Ops { get; set; }

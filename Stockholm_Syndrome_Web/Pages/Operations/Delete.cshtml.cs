@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -15,13 +16,15 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
     [Authorize(Roles = "OpsCreate,OpsManager")]
     public class DeleteModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly ILogger<Ops> _logger;
+        public readonly UserManager<ApplicationUser> _userManager;
 
-        public DeleteModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context, ILogger<Ops> logger)
+        public DeleteModel(ApplicationDbContext context, ILogger<Ops> logger, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _logger = logger;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -34,7 +37,7 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
                 return NotFound();
             }
 
-            Ops = await _context.Ops.FirstOrDefaultAsync(m => m.Id == id);
+            Ops = await _context.Ops.Include(c => c.Creator).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Ops == null)
             {
@@ -50,16 +53,18 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
                 return NotFound();
             }
 
-            Ops = await _context.Ops.FindAsync(id);
+            Ops = await _context.Ops.Include(c => c.Creator).FirstOrDefaultAsync(m => m.Id == id);
 
             // Check if the user is allowed to delete this OP
-            if(!User.IsInRole("OpsManager"))
+            if (!User.IsInRole("OpsManager"))
             { 
-				if (Ops.Creator == null || Ops.Creator != User.Identity)
+				if (Ops.Creator == null || Ops.Creator != await _userManager.GetUserAsync(User))
 				{
                     return RedirectToPage("./Index");
                 }
 			}
+
+            Ops = await _context.Ops.FindAsync(id);
 
             if (Ops != null)
             {

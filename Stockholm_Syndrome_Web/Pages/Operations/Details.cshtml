@@ -88,14 +88,26 @@
 						<a asp-page="./Delete" asp-route-id="@Model.Ops.Id" class="btn btn-danger m-2" style="width:200px">Delete</a>
 						<a asp-page="./Edit" asp-route-id="@Model.Ops.Id" class="btn btn-primary m-2" style="width:200px">Edit</a>
 					}
-					else if (Model.Ops.Creator != null)
+					else if (User.IsInRole("OpsCreate"))
 					{
-						if (Model.Ops.Creator == User.Identity)
+						var u = await Model._userManager.GetUserAsync(User);
+						if (Model.Ops.Creator != null && u != null)
 						{
-							<a asp-page="./Delete" asp-route-id="@Model.Ops.Id" class="btn btn-danger m-2" style="width:200px">Delete</a>
-							<a asp-page="./Edit" asp-route-id="@Model.Ops.Id" class="btn btn-primary m-2" style="width:200px">Edit</a>
+							if (Model.Ops.Creator == u)
+							{
+								<a asp-page="./Delete" asp-route-id="@Model.Ops.Id" class="btn btn-danger m-2" style="width:200px">Delete</a>
+							}
 						}
+						<a asp-page="./Edit" asp-route-id="@Model.Ops.Id" class="btn btn-primary m-2" style="width:200px">Edit</a>
 					}
+					@*else if (Model.Ops.Creator != null)
+			{
+				if (Model.Ops.Creator == User.Identity)
+				{
+					<a asp-page="./Delete" asp-route-id="@Model.Ops.Id" class="btn btn-danger m-2" style="width:200px">Delete</a>
+					<a asp-page="./Edit" asp-route-id="@Model.Ops.Id" class="btn btn-primary m-2" style="width:200px">Edit</a>
+				}
+			}*@
 				}
 				<a asp-page="./Index" class="btn btn-primary m-2">Back</a>
 			</div>
