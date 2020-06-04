@@ -20,7 +20,14 @@ namespace Stockholm_Syndrome_Web.Pages.Management
         public IndexModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context)
         {
             _context = context;
-            foreach(var user in _context.Users)
+
+        }
+
+        public List<UserRoles> userRoles = new List<UserRoles>();
+
+        public void OnGetAsync()
+        {
+            foreach (var user in _context.Users)
             {
                 var roles = from ur in _context.UserRoles
                             join r in _context.Roles on ur.RoleId equals r.Id
@@ -28,25 +35,26 @@ namespace Stockholm_Syndrome_Web.Pages.Management
                             select new { ur.UserId, ur.RoleId, r.Name };
 
                 List<int> rolesInt = new List<int>();
-                foreach(var role in roles)
+                foreach (var role in roles)
                 {
                     rolesInt.Add(role.RoleId);
+                }
+
+                var evecharacter = _context.EveCharacters.Where(e => e.User == user).FirstOrDefault(c => c.DefaultToon == true);
+                string ec = "";
+                if (evecharacter != null)
+                {
+                    ec = evecharacter.CharacterName;
                 }
 
                 userRoles.Add(new UserRoles
                 {
                     UserId = user.Id,
                     UserName = user.UserName,
-                    Roles = rolesInt
+                    Roles = rolesInt,
+                    EveCharacter = ec
                 });
             }
-        }
-
-        public List<UserRoles> userRoles = new List<UserRoles>();
-
-        public void OnGetAsync()
-        {
-
         }
     }
 }

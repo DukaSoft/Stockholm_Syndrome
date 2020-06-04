@@ -10,6 +10,7 @@
             <thead>
                 <tr>
                     <th>Username</th>
+                    <th>Default Character</th>
                     <th>Roles</th>
                     <th></th>
                 </tr>
@@ -20,6 +21,9 @@
                     <tr>
                         <td>
                             @item.UserName
+                        </td>
+                        <td>
+                            @item.EveCharacter
                         </td>
                         <td>
                             @foreach (var role in item.Roles)
