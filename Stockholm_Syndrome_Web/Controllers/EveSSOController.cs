@@ -228,15 +228,22 @@ namespace Stockholm_Syndrome.Controllers
 				}
 				// ToDo: If the EveCharacter is already on the list
 				//       And the user is the same, update it.
-
-				await _context.EveCharacters.AddAsync(new EveCharacter
+				
+				var ch = new EveCharacter
 				{
 					User = user,
 					CharacterId = character.CharacterId,
 					CharacterName = character.CharacterName,
 					DefaultToon = false,
 					CharacterRefreshToken = tokens.RefreshToken
-				});
+				};
+
+				if (await _context.EveCharacters.FirstOrDefaultAsync(c => c.User == user) == null)
+				{
+					ch.DefaultToon = true;
+				}
+
+				await _context.EveCharacters.AddAsync(ch);
 				await _context.SaveChangesAsync();
 
 				await UpdateCorpIds(user);
