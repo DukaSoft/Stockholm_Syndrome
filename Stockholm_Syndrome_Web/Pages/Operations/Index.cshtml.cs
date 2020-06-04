@@ -26,5 +26,21 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
         {
             Ops = await _context.Ops.OrderBy(d => d.OpsTime).ToListAsync();
         }
+
+        public async Task<string> Creator(int id)
+        {
+            var ops = await _context.Ops.Include(u => u.Creator).ThenInclude(e => e.EveCharacter).FirstOrDefaultAsync(m => m.Id == id);
+            string creator = ops.Creator.DiscordName;
+
+            foreach (var character in ops.Creator.EveCharacter)
+            {
+                if (character.DefaultToon == true)
+                {
+                    creator = character.CharacterName;
+                }
+            }
+
+            return creator;
+        }
     }
 }
