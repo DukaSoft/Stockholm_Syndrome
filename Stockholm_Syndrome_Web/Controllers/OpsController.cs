@@ -17,6 +17,9 @@ namespace Stockholm_Syndrome_Web.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        // ToDo: Add propper code
+        private const string _opToken = "ionoiesjn3489hnsiunue4ihhsuoyeh4uybuyo3bsbdjhtb4utb3nkjnwu4ht";
+
         public OpsController(ApplicationDbContext context)
         {
             _context = context;
@@ -26,8 +29,7 @@ namespace Stockholm_Syndrome_Web.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ApiOpsModel>>> GetOps(string token)
         {
-            // ToDo: Add propper code
-            if (token != "ionoiesjn3489hnsiunue4ihhsuoyeh4uybuyo3bsbdjhtb4utb3nkjnwu4ht")
+            if (token != _opToken)
 			{
 				return NotFound();
 			}
@@ -57,22 +59,27 @@ namespace Stockholm_Syndrome_Web.Controllers
             }
 
 
-            return apiOpsModel.ToList();
+            return Ok(apiOpsModel.ToList());
         }
 
-        // GET: api/Ops/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Ops>> GetOps(int id)
-        //{
-        //    var ops = await _context.Ops.FindAsync(id);
+        // GET: api/Ops/5/token
+        [HttpGet("{id}/{token}")]
+        public async Task<ActionResult<Ops>> GetOps(int id, string token)
+        {
+            if (token != _opToken)
+            {
+                return NotFound();
+            }
 
-        //    if (ops == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var ops = await _context.Ops.FindAsync(id);
 
-        //    return ops;
-        //}
+            if (ops == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ops);
+        }
 
         // PUT: api/Ops/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
