@@ -58,6 +58,8 @@ namespace Stockholm_Syndrome_Web.Controllers
                 structureFuel.Add(fm);
 			}
 
+            structureFuel = structureFuel.OrderBy(d => d.Expire).ToList();
+
             return structureFuel;
         }
     }
