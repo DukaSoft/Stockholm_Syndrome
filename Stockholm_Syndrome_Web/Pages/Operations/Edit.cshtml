@@ -3,56 +3,59 @@
 @{
 	ViewData["Title"] = "Operations - ";
 }
-<h4>Ops</h4>
+<h4 class="text-center my-4">Edit Operation</h4>
 <hr />
-<div class="row">
-	<div class="col-md-4">
-		<form method="post">
+<div class="container">
+	<form method="post">
+		<div class="row mx-md-5 border-fancy justify-content-center">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<input type="hidden" asp-for="Ops.Id" />
-			<div class="form-group">
-				<label asp-for="Ops.OpsTime" class="control-label"></label>
-				<input asp-for="Ops.OpsTime" class="form-control" />
-				<span asp-validation-for="Ops.OpsTime" class="text-danger"></span>
+			<div class="col-5 m-md-4">
+				<div class="form-group">
+					<label asp-for="Ops.OpsTime" class="control-label"></label>
+					<input asp-for="Ops.OpsTime" class="form-control" />
+					<span asp-validation-for="Ops.OpsTime" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<input asp-for="Ops.StagingSystemId" hidden class="form-control" />
+				</div>
+				<div class="form-group">
+					<label asp-for="Ops.StagingSystemName" class="control-label"></label>
+					<input asp-for="Ops.StagingSystemName" class="form-control" />
+					<span asp-validation-for="Ops.StagingSystemName" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<input asp-for="Ops.TargetSystemId" hidden class="form-control" />
+				</div>
+				<div class="form-group">
+					<label asp-for="Ops.TargetSystemName" class="control-label"></label>
+					<input asp-for="Ops.TargetSystemName" class="form-control" />
+					<span asp-validation-for="Ops.TargetSystemName" class="text-danger"></span>
+				</div>
 			</div>
-			<div class="form-group">
-				<input asp-for="Ops.StagingSystemId" hidden class="form-control" />
-			</div>
-			<div class="form-group">
-				<label asp-for="Ops.StagingSystemName" class="control-label"></label>
-				<input asp-for="Ops.StagingSystemName" class="form-control" />
-				<span asp-validation-for="Ops.StagingSystemName" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<input asp-for="Ops.TargetSystemId" hidden class="form-control" />
-			</div>
-			<div class="form-group">
-				<label asp-for="Ops.TargetSystemName" class="control-label"></label>
-				<input asp-for="Ops.TargetSystemName" class="form-control" />
-				<span asp-validation-for="Ops.TargetSystemName" class="text-danger"></span>
-			</div>
-			<div class="form-group">
+			<div class="col-5 m-md-4">
+				
 				<input asp-for="Ops.FcId" hidden class="form-control" />
+				
+				<div class="form-group">
+					<label asp-for="Ops.FcName" class="control-label"></label>
+					<input asp-for="Ops.FcName" class="form-control" />
+					<span asp-validation-for="Ops.FcName" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Ops.Description" class="control-label"></label>
+					<textarea asp-for="Ops.Description" class="form-control" rows="5" style="resize:none"></textarea>
+					<span asp-validation-for="Ops.Description" class="text-danger"></span>
+				</div>
 			</div>
+		</div>
+		<div class="row mx-md-5 border-fancy justify-content-center">
 			<div class="form-group">
-				<label asp-for="Ops.FcName" class="control-label"></label>
-				<input asp-for="Ops.FcName" class="form-control" />
-				<span asp-validation-for="Ops.FcName" class="text-danger"></span>
+				<input type="submit" value="Save" class="btn btn-success mt-3 mx-3" style="width:200px" />
+				<a asp-page="./Index" class="btn btn-primary mt-3 mx-3" style="width:110px">Back</a>
 			</div>
-			<div class="form-group">
-				<label asp-for="Ops.Description" class="control-label"></label>
-				<textarea asp-for="Ops.Description" class="form-control"></textarea>
-				<span asp-validation-for="Ops.Description" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<input type="submit" value="Save" class="btn btn-primary" />
-			</div>
-		</form>
-	</div>
-</div>
-
-<div>
-	<a asp-page="./Index">Back to List</a>
+		</div>
+	</form>
 </div>
 
 @section Scripts {
