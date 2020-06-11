@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 using Serilog;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Stockholm_Syndrome.Controllers
 {
@@ -103,6 +104,7 @@ namespace Stockholm_Syndrome.Controllers
 		/// <param name="code"></param>
 		/// <param name="state">Whats the call about?</param>
 		/// <returns></returns>
+		[Authorize]
 		[Route("EveSSO/Callback")]
 		public async Task<IActionResult> Callback(string code, string state)
 		{
