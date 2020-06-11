@@ -64,21 +64,36 @@ namespace Stockholm_Syndrome_Web.Controllers
 
         // GET: api/Ops/5/token
         [HttpGet("{id}/{token}")]
-        public async Task<ActionResult<Ops>> GetOps(int id, string token)
+        public async Task<ActionResult<ApiOpsModel>> GetOps(int id, string token)
         {
             if (token != _opToken)
             {
                 return NotFound();
             }
 
-            var ops = await _context.Ops.FindAsync(id);
+            var ops = await _context.Ops.Include(c => c.Creator).Include(t => t.OpTags).Include(p => p.Participants).FirstOrDefaultAsync(i => i.Id == id);
+            ApiOpsModel apiOpsModel = new ApiOpsModel
+            {
+                Id = ops.Id,
+                OpsTime = ops.OpsTime,
+                StagingSystemId = ops.StagingSystemId,
+                StagingSystemName = ops.StagingSystemName,
+                TargetSystemId = ops.TargetSystemId,
+                TargetSystemName = ops.TargetSystemName,
+                FcId = ops.FcId,
+                FcName = ops.FcName,
+                CreatorId = ops.Creator.DiscordId,
+                Creator = ops.Creator.DiscordName,
+                OpTags = ops.OpTags,
+                Description = ops.Description
+            };
 
             if (ops == null)
             {
                 return NotFound();
             }
 
-            return Ok(ops);
+            return Ok(apiOpsModel);
         }
 
         // PUT: api/Ops/5
