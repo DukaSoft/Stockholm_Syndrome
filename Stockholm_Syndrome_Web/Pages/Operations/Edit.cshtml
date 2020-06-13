@@ -34,13 +34,15 @@
 				</div>
 			</div>
 			<div class="col-5 m-md-4">
-				
+
 				<input asp-for="Ops.FcId" hidden class="form-control" />
-				
+
 				<div class="form-group">
+					@*<label asp-for="Ops.FcName" class="control-label"></label>
+						<input asp-for="Ops.FcName" class="form-control" />
+						<span asp-validation-for="Ops.FcName" class="text-danger"></span>*@
 					<label asp-for="Ops.FcName" class="control-label"></label>
-					<input asp-for="Ops.FcName" class="form-control" />
-					<span asp-validation-for="Ops.FcName" class="text-danger"></span>
+					<select asp-for="Ops.FcName" asp-items="@Model.FCs" class="form-control"></select>
 				</div>
 				<div class="form-group">
 					<label asp-for="Ops.Description" class="control-label"></label>
