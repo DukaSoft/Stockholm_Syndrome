@@ -593,8 +593,9 @@ namespace Stockholm_Syndrome.Controllers
 			//await _roleManager.CreateAsync(new ApplicationRole("Miner", "Miners are able to see Frack Schedule"));
 			//await _roleManager.CreateAsync(new ApplicationRole("MemberOfFURR", "Member of our Newbie"));
 			//await _roleManager.CreateAsync(new ApplicationRole("RecruitmentAdmin", "Recruitment admin can approve or reject Applications"));
-			await _roleManager.CreateAsync(new ApplicationRole("OpsCreate", "Able to Create Ops"));
-			await _roleManager.CreateAsync(new ApplicationRole("OpsManager", "Able to Edit/Delete Ops"));
+			//await _roleManager.CreateAsync(new ApplicationRole("OpsCreate", "Able to Create Ops"));
+			//await _roleManager.CreateAsync(new ApplicationRole("OpsManager", "Able to Edit/Delete Ops"));
+			//await _roleManager.CreateAsync(new ApplicationRole("FC", "Fleet Commander"));
 
 			await Task.CompletedTask;
 		}

@@ -55,7 +55,7 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
             bool HasUserSelected = false;
             foreach (var usr in userlist)
             {
-                if (await _userManager.IsInRoleAsync(usr, "OpsCreate") || await _userManager.IsInRoleAsync(usr, "OpsManager"))
+                if (await _userManager.IsInRoleAsync(usr, "FC"))
                 {
                     var defToon = usr.EveCharacter.FirstOrDefault(d => d.DefaultToon == true);
                     if (defToon != null)
