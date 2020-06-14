@@ -113,11 +113,11 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
             FCs = FCs.OrderBy(g => g.Group.Name).ThenBy(v => v.Value).ToList();
             if(HasUserSelected != true)
 			{
-                FCs.Insert(0, new SelectListItem("TBD", "", true));
+                FCs.Insert(0, new SelectListItem("TBD", "TBD", true));
             }
 			else
 			{
-                FCs.Insert(0, new SelectListItem("TBD", ""));
+                FCs.Insert(0, new SelectListItem("TBD", "TBD"));
 			}
 
             return Page();
