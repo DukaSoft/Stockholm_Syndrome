@@ -76,7 +76,7 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
                 }
 			}
             FCs = FCs.OrderBy(g => g.Group.Name).ThenBy(v => v.Value).ToList();
-            FCs.Insert(0, new SelectListItem("TBD", "", true));
+            FCs.Insert(0, new SelectListItem("TBD", "TBD", true));
 
             return Page();
         }
