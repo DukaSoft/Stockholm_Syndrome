@@ -18,7 +18,7 @@
 		int i = 0;
 		foreach (var item in Model.Ops)
 		{
-			<div class="Ops border-fancy border-fancy-list mx-md-5 mx-sm-0 my-md-1 p-2">
+			<div class="border-fancy border-fancy-list mx-md-5 mx-sm-0 my-md-1 p-2">
 				<a asp-page="Details" asp-route-id="@item.Id">
 					<div class="row">
 						@*Times*@
@@ -40,9 +40,6 @@
 								</div>
 							</div>
 						</div>
-						@*<div class="col-md-2">
-
-							</div>*@
 						<div class="col-md-3 ">
 							@*Countdown*@
 							<h4 class="text-center" id="@i cd">Initializing</h4>
@@ -77,9 +74,6 @@
 							<h6>FC</h6>
 							<h6>@item.FcName</h6>
 						</div>
-						@*<div class="col-md-3">
-
-							</div>*@
 						<div class="col-md-5">
 							@*Description*@
 							<h6>Description</h6>

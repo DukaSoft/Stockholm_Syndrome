@@ -11,7 +11,7 @@ using Stockholm_Syndrome_Web.Data;
 using Stockholm_Syndrome_Web.Helpers;
 using Stockholm_Syndrome_Web.Models;
 
-namespace Stockholm_Syndrome_Web.Pages.Management
+namespace Stockholm_Syndrome_Web.Pages.Management.Users
 {
     [Authorize(Roles = "Admin")]
     public class EditModel : PageModel

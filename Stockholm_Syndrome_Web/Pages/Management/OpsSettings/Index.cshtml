@@ -1,0 +1,47 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.Management.OpsSettings.IndexModel
+@{
+	ViewData["Title"] = "Ops Settings -";
+}
+
+<h2 class="text-center m-4">Operations Settings</h2>
+
+<div class="container">
+	<div class="">
+		<div class="row justify-content-md-center">
+			<div class="col-md-5 border-fancy mx-md-1 mx-sm-0 my-md-1 p-2">
+				<h4 class="text-center">Tags</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="align-middle">Name</th>
+							<th class="align-middle">Description</th>
+							<th class="text-right"><a asp-page="Add" class="btn btn-primary">New</a></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var tag in Model.Tags)
+						{
+							<tr>
+								<td class="align-middle">
+									<div class="d-flex align-items-center" style="border-radius: 16px ; height:28px; width:80px; background: @tag.Color">
+										<text class="m-auto">@tag.Name</text>
+									</div>
+								</td>
+								<td class="align-middle">
+									@tag.Description
+								</td>
+								<td class="text-right">
+									<a asp-page="Edit" asp-route-id="@tag.Id" class="btn btn-sm btn-primary mr-2">Edit</a>  <a asp-page="Delete" asp-route-id="@tag.Id" class="btn btn-sm btn-danger">Delete</a>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-5 border-fancy mx-md-1 mx-sm-0 my-md-1 p-2">
+				<h4>Something here</h4>
+			</div>
+		</div>
+	</div>
+</div>

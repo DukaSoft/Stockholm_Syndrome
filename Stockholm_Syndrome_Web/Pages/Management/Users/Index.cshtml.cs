@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Stockholm_Syndrome_Web.Data;
 using Stockholm_Syndrome_Web.Models;
 
-namespace Stockholm_Syndrome_Web.Pages.Management
+namespace Stockholm_Syndrome_Web.Pages.Management.Users
 {
     [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
