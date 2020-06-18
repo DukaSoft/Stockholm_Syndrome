@@ -8,64 +8,65 @@
 	<link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark navbar-bg box-shadow">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-page="/Index"><span class="ss-text-red">Stockholm</span> Syndrome</a>
-                <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
-							<div class="dropdown-menu" style="">
-								@if (User.IsInRole("MemberOfAlliance"))
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark navbar-bg box-shadow">
+			<div class="container-fluid">
+				<a class="navbar-brand mr-4" asp-area="" asp-page="/Index"><span class="ss-text-red">Stockholm</span> Syndrome</a>
+				<button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="ml-4 navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+					<partial name="_LoginPartial" />
+					@if (User.IsInRole("MemberOfAlliance"))
+					{
+						<ul class="navbar-nav flex-grow-1">
+							<li class="nav-item">
+								<a class="nav-link btn btn-link" asp-area="" asp-page="/Operations/Index">Operations</a>
+							</li>
+							<li class="nav-item">
+								@if (User.IsInRole("FuelAdmin") || User.IsInRole("FuelManager"))
 								{
-									<a class="dropdown-item" asp-area="" asp-page="/Operations/Index">Operations</a>
+									<a class="nav-link btn btn-link" asp-area="" asp-page="/StructureManagement/FuelLevels">Structure Fuel</a>
 								}
-								@if (User.IsInRole("Director") || User.IsInRole("Admin"))
-								{
-									<a class="dropdown-item" asp-area="" asp-page="/Management/OpsSettings/Index">Operation Settings</a>
-								}
-								<div class="dropdown-divider"></div>
-								@if (User.IsInRole("Admin") || User.IsInRole("FuelAdmin") || User.IsInRole("FuelManager"))
-								{
-									<a class="dropdown-item" asp-area="" asp-page="/StructureManagement/FuelLevels">Structure Fuel</a>
-								}
-								@if (User.IsInRole("Admin"))
-								{
-									<a class="dropdown-item" asp-area="" asp-page="/Management/Users/Index">User Management</a>
-								}
-								@if (User.IsInRole("Admin"))
-								{
-									<a class="dropdown-item" asp-area="" asp-page="/AllianceManagement/Index">Alliance Management</a>
-								}
-							</div>
-						</li>
-					</ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container-fluid">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+							</li>
+							@if (User.IsInRole("Admin") || User.IsInRole("Director"))
+							{
+								<li class="nav-item dropdown">
+									<a class="nav-link btn btn-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Management</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" asp-area="" asp-page="/Management/OpsSettings/Index">Operation Settings</a>
+										<a class="dropdown-item" asp-area="" asp-page="/Management/Users/Index">User Management</a>
+										@if (User.IsInRole("Admin"))
+										{
+											<a class="dropdown-item" asp-area="" asp-page="/AllianceManagement/Index">Alliance Management</a>
+										}
+									</div>
+								</li>
 
-    <footer class="footer text-muted">
-        <div class="container">
-            &copy; 2020 - Stockholm-Syndrome
-        </div>
-    </footer>
+							}
+						</ul>
+					}
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="container-fluid">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+	<footer class="footer text-muted">
+		<div class="container">
+			&copy; 2020 - Stockholm-Syndrome
+		</div>
+	</footer>
 
-    @RenderSection("Scripts", required: false)
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	@RenderSection("Scripts", required: false)
 </body>
 </html>
