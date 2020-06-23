@@ -28,27 +28,29 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
             _userManager = userManager;
             FCs = new List<SelectListItem>();
 
-            Ops = new Ops();
+			Ops = new Ops();
 
-            Ops.Description= @"Fleet Type: Alpha/Bravo/Charlie
+            Ops.OpsTime = DateTime.Parse(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm"));
+
+            Ops.Description = @"Fleet Type: Alpha/Bravo/Charlie
 Corp Name: 
 Structure Type: 
 Timer: Shield / Armor Hull
 Structure Name: System - Structure name
 Location: planet / moon / other celestial";
 
-   //         UiTagsChecked = new List<SelectListItem>();
-   //         foreach (var tag in _context.Tags.ToList())
+			//         UiTagsChecked = new List<SelectListItem>();
+			//         foreach (var tag in _context.Tags.ToList())
 			//{
-   //             SelectListItem item = new SelectListItem
-   //             {
-   //                 Text = tag.Name,
-   //                 Value = tag.Name,
-   //             };
+			//             SelectListItem item = new SelectListItem
+			//             {
+			//                 Text = tag.Name,
+			//                 Value = tag.Name,
+			//             };
 
-   //             UiTagsChecked.Add(item);
+			//             UiTagsChecked.Add(item);
 			//}
-        }
+		}
 
         public async Task<IActionResult> OnGet()
         {
