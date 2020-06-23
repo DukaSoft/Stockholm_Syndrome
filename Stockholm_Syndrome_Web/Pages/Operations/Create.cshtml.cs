@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using Serilog;
 using Stockholm_Syndrome_Web.Data;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations
@@ -24,6 +27,18 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
             Tags = _context.Tags.ToList();
             _userManager = userManager;
             FCs = new List<SelectListItem>();
+
+   //         UiTagsChecked = new List<SelectListItem>();
+   //         foreach (var tag in _context.Tags.ToList())
+			//{
+   //             SelectListItem item = new SelectListItem
+   //             {
+   //                 Text = tag.Name,
+   //                 Value = tag.Name,
+   //             };
+
+   //             UiTagsChecked.Add(item);
+			//}
         }
 
         public async Task<IActionResult> OnGet()
@@ -86,6 +101,9 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
 
         public List<OpsTag> Tags { get; set; }
 
+        //[BindProperty]
+        //public List<SelectListItem> UiTagsChecked { get; protected set; }
+
         public List<SelectListItem> FCs { get; set; }
 
         
@@ -98,9 +116,17 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
             {
                 return Page();
             }
+
+            // Set the creator of the Op
             Ops.Creator = await _userManager.GetUserAsync(User);
+
             _context.Ops.Add(Ops);
+
+            // Add Tags
+
             await _context.SaveChangesAsync();
+
+            Log.Information("Ops {@Ops} Created by {Username}", Ops, User.Identity.Name);
 
             return RedirectToPage("./Index");
         }
