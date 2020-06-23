@@ -39,6 +39,15 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
 
             Ops = await _context.Ops.Include(c => c.Creator).FirstOrDefaultAsync(m => m.Id == id);
 
+            if (User.IsInRole("OpsCreate"))
+            {
+                // Check to see if the user is allowed to delete this op
+                if (Ops.Creator != await _userManager.GetUserAsync(User))
+                {
+                    return Forbid();
+                }
+            }
+
             if (Ops == null)
             {
                 return NotFound();

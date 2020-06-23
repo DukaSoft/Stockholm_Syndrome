@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,6 +14,7 @@ using Stockholm_Syndrome_Web.Data;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations
 {
+    [Authorize(Roles = "OpsCreate,OpsManager")]
     public class EditModel : PageModel
     {
         private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
@@ -30,6 +32,9 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
 
         public List<SelectListItem> FCs { get; set; }
 
+
+        static bool allowEdit = false;
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -37,12 +42,25 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
                 return NotFound();
             }
 
-            Ops = await _context.Ops.FirstOrDefaultAsync(m => m.Id == id);
+            Ops = await _context.Ops.Include(c => c.Creator).Include(t => t.OpTags).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Ops == null)
             {
                 return NotFound();
             }
+
+            if(User.IsInRole("OpsCreate"))
+			{
+                // Check to see if the user is allowed to edit this op
+                if(Ops.Creator != await _userManager.GetUserAsync(User))
+				{
+                    return Forbid();
+				}
+				else
+				{
+                    allowEdit = true;
+                }
+			}
 
             var userlist = _context.Users.Include(e => e.EveCharacter).ToList();
             var DedGr = new SelectListGroup
@@ -132,6 +150,16 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            if (User.IsInRole("OpsCreate"))
+            {
+                // Check to see if the user is allowed to edit this op
+
+                if (allowEdit == false)
+                {
+                    return Forbid();
+                }
             }
 
             _context.Attach(Ops).State = EntityState.Modified;
