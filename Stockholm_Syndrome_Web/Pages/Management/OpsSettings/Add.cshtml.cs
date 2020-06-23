@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +11,7 @@ using Stockholm_Syndrome_Web.Data;
 
 namespace Stockholm_Syndrome_Web.Pages.Management.OpsSettings
 {
+    [Authorize(Roles = "Admin,Director")]
     public class AddModel : PageModel
     {
         private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
