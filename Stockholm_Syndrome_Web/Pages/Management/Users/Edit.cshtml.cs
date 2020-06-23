@@ -13,7 +13,7 @@ using Stockholm_Syndrome_Web.Models;
 
 namespace Stockholm_Syndrome_Web.Pages.Management.Users
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Director")]
     public class EditModel : PageModel
     {
         private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
