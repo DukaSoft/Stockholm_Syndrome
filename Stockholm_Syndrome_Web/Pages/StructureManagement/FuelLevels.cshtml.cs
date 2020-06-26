@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Stockholm_Syndrome.Controllers;
+using Stockholm_Syndrome_Web.Controllers;
 using Stockholm_Syndrome_Web.Data;
 using Stockholm_Syndrome_Web.Models;
 

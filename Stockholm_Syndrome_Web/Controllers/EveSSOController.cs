@@ -16,7 +16,7 @@ using Newtonsoft.Json.Linq;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Stockholm_Syndrome.Controllers
+namespace Stockholm_Syndrome_Web.Controllers
 {
 	public class EveSSOController : Controller
 	{
