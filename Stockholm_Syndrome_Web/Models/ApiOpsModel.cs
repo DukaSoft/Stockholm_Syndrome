@@ -25,7 +25,13 @@ namespace Stockholm_Syndrome_Web.Models
 		public string CreatorId { get; set; }
 		public string Creator { get; set; }
 
-		public List<OpsTags> OpTags { get; set; }
+		public string OpStatus { get; set; }
+
+		public string StructureOwner { get; set; }
+		public string StructureType { get; set; }
+		public string StructureName { get; set; }
+		public string StructureLayer { get; set; }
+		public string StructureStatus { get; set; }
 
 		public string Description { get; set; }
 
