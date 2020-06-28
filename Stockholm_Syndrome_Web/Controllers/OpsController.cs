@@ -11,33 +11,33 @@ using Stockholm_Syndrome_Web.Models;
 
 namespace Stockholm_Syndrome_Web.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OpsController : ControllerBase
-    {
-        private readonly ApplicationDbContext _context;
+	[Route("api/[controller]")]
+	[ApiController]
+	public class OpsController : ControllerBase
+	{
+		private readonly ApplicationDbContext _context;
 
-        // ToDo: Add propper code
-        private const string _opToken = "ionoiesjn3489hnsiunue4ihhsuoyeh4uybuyo3bsbdjhtb4utb3nkjnwu4ht";
+		// ToDo: Add propper code
+		private const string _opToken = "ionoiesjn3489hnsiunue4ihhsuoyeh4uybuyo3bsbdjhtb4utb3nkjnwu4ht";
 
-        public OpsController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+		public OpsController(ApplicationDbContext context)
+		{
+			_context = context;
+		}
 
-        // GET: api/Ops
-        [HttpGet]
-        public async Task<ActionResult<List<ApiOpsModel>>> GetOps(string token)
-        {
-            if (token != _opToken)
+		// GET: api/Ops
+		[HttpGet]
+		public async Task<ActionResult<List<ApiOpsModel>>> GetOps(string token)
+		{
+			if (token != _opToken)
 			{
 				return NotFound();
 			}
 
 			var ops = await _context.Ops.Include(c => c.Creator).Include(t => t.OpTags).Include(p => p.Participants).ToListAsync();
-            List<ApiOpsModel> apiOpsModel = new List<ApiOpsModel>();
+			List<ApiOpsModel> apiOpsModel = new List<ApiOpsModel>();
 
-            foreach(var op in ops)
+			foreach (var op in ops)
 			{
 				ApiOpsModel newOp = new ApiOpsModel
 				{
@@ -51,114 +51,129 @@ namespace Stockholm_Syndrome_Web.Controllers
 					FcName = op.FcName,
 					CreatorId = op.Creator.DiscordId,
 					Creator = op.Creator.DiscordName,
-					OpTags = op.OpTags,
+					OpStatus = op.OpStatus,
+					StructureOwner = op.StructureOwner,
+					StructureType = op.StructureType,
+					StructureName = op.StructureName,
+					StructureLayer = op.StructureLayer,
+					StructureStatus = op.StructureStatus,
 					Description = op.Description
 				};
 
 				apiOpsModel.Add(newOp);
-            }
+			}
 
 
-            return Ok(apiOpsModel.ToList());
-        }
+			return Ok(apiOpsModel.ToList());
+		}
 
-        // GET: api/Ops/5/token
-        [HttpGet("{id}/{token}")]
-        public async Task<ActionResult<ApiOpsModel>> GetOps(int id, string token)
-        {
-            if (token != _opToken)
-            {
-                return NotFound();
-            }
+		// GET: api/Ops/5/token
+		[HttpGet("{id}/{token}")]
+		public async Task<ActionResult<ApiOpsModel>> GetOps(int id, string token)
+		{
+			if (token != _opToken)
+			{
+				return NotFound();
+			}
 
-            var ops = await _context.Ops.Include(c => c.Creator).Include(t => t.OpTags).Include(p => p.Participants).FirstOrDefaultAsync(i => i.Id == id);
-            ApiOpsModel apiOpsModel = new ApiOpsModel
-            {
-                Id = ops.Id,
-                OpsTime = ops.OpsTime,
-                StagingSystemId = ops.StagingSystemId,
-                StagingSystemName = ops.StagingSystemName,
-                TargetSystemId = ops.TargetSystemId,
-                TargetSystemName = ops.TargetSystemName,
-                FcId = ops.FcId,
-                FcName = ops.FcName,
-                CreatorId = ops.Creator.DiscordId,
-                Creator = ops.Creator.DiscordName,
-                OpTags = ops.OpTags,
-                Description = ops.Description
-            };
+			if(OpsExists(id) == false)
+			{
+				return NotFound();
+			}
 
-            if (ops == null)
-            {
-                return NotFound();
-            }
+			var op = await _context.Ops.Include(c => c.Creator).Include(t => t.OpTags).Include(p => p.Participants).FirstOrDefaultAsync(i => i.Id == id);
+			ApiOpsModel apiOpsModel = new ApiOpsModel
+			{
+				Id = op.Id,
+				OpsTime = op.OpsTime,
+				StagingSystemId = op.StagingSystemId,
+				StagingSystemName = op.StagingSystemName,
+				TargetSystemId = op.TargetSystemId,
+				TargetSystemName = op.TargetSystemName,
+				FcId = op.FcId,
+				FcName = op.FcName,
+				CreatorId = op.Creator.DiscordId,
+				Creator = op.Creator.DiscordName,
+				OpStatus = op.OpStatus,
+				StructureOwner = op.StructureOwner,
+				StructureType = op.StructureType,
+				StructureName = op.StructureName,
+				StructureLayer = op.StructureLayer,
+				StructureStatus = op.StructureStatus,
+				Description = op.Description
+			};
 
-            return Ok(apiOpsModel);
-        }
+			if (op == null)
+			{
+				return NotFound();
+			}
 
-        // PUT: api/Ops/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutOps(int id, Ops ops)
-        //{
-        //    if (id != ops.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+			return Ok(apiOpsModel);
+		}
 
-        //    _context.Entry(ops).State = EntityState.Modified;
+		// PUT: api/Ops/5
+		// To protect from overposting attacks, enable the specific properties you want to bind to, for
+		// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+		//[HttpPut("{id}")]
+		//public async Task<IActionResult> PutOps(int id, Ops ops)
+		//{
+		//    if (id != ops.Id)
+		//    {
+		//        return BadRequest();
+		//    }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!OpsExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+		//    _context.Entry(ops).State = EntityState.Modified;
 
-        //    return NoContent();
-        //}
+		//    try
+		//    {
+		//        await _context.SaveChangesAsync();
+		//    }
+		//    catch (DbUpdateConcurrencyException)
+		//    {
+		//        if (!OpsExists(id))
+		//        {
+		//            return NotFound();
+		//        }
+		//        else
+		//        {
+		//            throw;
+		//        }
+		//    }
 
-        // POST: api/Ops
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPost]
-        //public async Task<ActionResult<Ops>> PostOps(Ops ops)
-        //{
-        //    _context.Ops.Add(ops);
-        //    await _context.SaveChangesAsync();
+		//    return NoContent();
+		//}
 
-        //    return CreatedAtAction("GetOps", new { id = ops.Id }, ops);
-        //}
+		// POST: api/Ops
+		// To protect from overposting attacks, enable the specific properties you want to bind to, for
+		// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+		//[HttpPost]
+		//public async Task<ActionResult<Ops>> PostOps(Ops ops)
+		//{
+		//    _context.Ops.Add(ops);
+		//    await _context.SaveChangesAsync();
 
-        // DELETE: api/Ops/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Ops>> DeleteOps(int id)
-        //{
-        //    var ops = await _context.Ops.FindAsync(id);
-        //    if (ops == null)
-        //    {
-        //        return NotFound();
-        //    }
+		//    return CreatedAtAction("GetOps", new { id = ops.Id }, ops);
+		//}
 
-        //    _context.Ops.Remove(ops);
-        //    await _context.SaveChangesAsync();
+		// DELETE: api/Ops/5
+		//[HttpDelete("{id}")]
+		//public async Task<ActionResult<Ops>> DeleteOps(int id)
+		//{
+		//    var ops = await _context.Ops.FindAsync(id);
+		//    if (ops == null)
+		//    {
+		//        return NotFound();
+		//    }
 
-        //    return ops;
-        //}
+		//    _context.Ops.Remove(ops);
+		//    await _context.SaveChangesAsync();
 
-        private bool OpsExists(int id)
-        {
-            return _context.Ops.Any(e => e.Id == id);
-        }
-    }
+		//    return ops;
+		//}
+
+		private bool OpsExists(int id)
+		{
+			return _context.Ops.Any(e => e.Id == id);
+		}
+	}
 }
