@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Serilog;
 using Stockholm_Syndrome_Web.Data;
+using Stockholm_Syndrome_Web.Models;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations
 {
@@ -27,29 +28,6 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
             Tags = _context.Tags.ToList();
             _userManager = userManager;
             FCs = new List<SelectListItem>();
-
-			Ops = new Ops();
-
-            Ops.OpsTime = DateTime.Parse(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm"));
-
-            Ops.Description = @"Fleet Type: Alpha/Bravo/Charlie
-Corp Name: 
-Structure Type: 
-Timer: Shield / Armor Hull
-Structure Name: System - Structure name
-Location: planet / moon / other celestial";
-
-			//         UiTagsChecked = new List<SelectListItem>();
-			//         foreach (var tag in _context.Tags.ToList())
-			//{
-			//             SelectListItem item = new SelectListItem
-			//             {
-			//                 Text = tag.Name,
-			//                 Value = tag.Name,
-			//             };
-
-			//             UiTagsChecked.Add(item);
-			//}
 		}
 
         public async Task<IActionResult> OnGet()
@@ -104,6 +82,51 @@ Location: planet / moon / other celestial";
             FCs = FCs.OrderBy(g => g.Group.Name).ThenBy(v => v.Value).ToList();
             FCs.Insert(0, new SelectListItem("TBD", "TBD", true));
 
+            OpsStatus = new List<SelectListItem>();
+            foreach(var opsStatus in OpsHelper.OpsStatus)
+			{
+                var item = new SelectListItem();
+                item.Text = opsStatus;
+                item.Value = opsStatus;
+                if(opsStatus == "Bravo")
+				{
+                    item.Selected = true;
+				}
+                OpsStatus.Add(item);
+			}
+
+            StructureLayer = new List<SelectListItem>();
+            foreach (var structureLayer in OpsHelper.StructureLayer)
+            {
+                StructureLayer.Add(new SelectListItem()
+                {
+                    Text = structureLayer,
+                    Value = structureLayer
+                });
+
+            }
+
+            StructureType = new List<SelectListItem>();
+            foreach (var structureType in OpsHelper.StructureType)
+			{
+                StructureType.Add(new SelectListItem()
+                {
+                    Text = structureType,
+                    Value = structureType 
+                });
+
+            }
+
+            StructureStatus = new List<SelectListItem>();
+            foreach(var structureStatus in OpsHelper.StructureStatus)
+			{
+                StructureStatus.Add(new SelectListItem()
+                {
+                    Text = structureStatus,
+                    Value = structureStatus
+                });
+			}
+
             return Page();
         }
 
@@ -117,11 +140,17 @@ Location: planet / moon / other celestial";
 
         public List<SelectListItem> FCs { get; set; }
 
-        
+        public List<SelectListItem> OpsStatus { get; set; }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public List<SelectListItem> StructureLayer { get; set; }
+
+        public List<SelectListItem> StructureType { get; set; }
+
+		public List<SelectListItem> StructureStatus { get; set; }
+
+		// To protect from overposting attacks, enable the specific properties you want to bind to, for
+		// more details, see https://aka.ms/RazorPagesCRUD.
+		public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {

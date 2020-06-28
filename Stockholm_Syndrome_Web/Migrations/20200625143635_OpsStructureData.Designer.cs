@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stockholm_Syndrome_Web.Data;
 
 namespace Stockholm_Syndrome_Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200625143635_OpsStructureData")]
+    partial class OpsStructureData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -327,6 +329,10 @@ namespace Stockholm_Syndrome_Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AllianceCorpName")
+                        .HasColumnType("nvarchar(2000)")
+                        .HasMaxLength(2000);
+
                     b.Property<int?>("CreatorId")
                         .HasColumnType("int");
 
@@ -338,10 +344,6 @@ namespace Stockholm_Syndrome_Web.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("FcName")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("OpStatus")
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
@@ -362,14 +364,6 @@ namespace Stockholm_Syndrome_Web.Migrations
                     b.Property<string>("StructureName")
                         .HasColumnType("nvarchar(2000)")
                         .HasMaxLength(2000);
-
-                    b.Property<string>("StructureOwner")
-                        .HasColumnType("nvarchar(2000)")
-                        .HasMaxLength(2000);
-
-                    b.Property<string>("StructureStatus")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
 
                     b.Property<string>("StructureType")
                         .HasColumnType("nvarchar(500)")

@@ -36,6 +36,30 @@ namespace Stockholm_Syndrome_Web.Data
 
 		public List<OpsTags> OpTags { get; set; }
 
+		[DisplayName("Op Status")]
+		[MaxLength(500)]
+		public string OpStatus { get; set; }
+
+		[DisplayName("Owner")]
+		[MaxLength(2000)]
+		public string StructureOwner { get; set; }
+
+		[DisplayName("Type")]
+		[MaxLength(500)]
+		public string StructureType { get; set; }
+
+		[DisplayName("Name")]
+		[MaxLength(2000)]
+		public string StructureName { get; set; }
+
+		[DisplayName("Layer")]
+		[MaxLength(500)]
+		public string StructureLayer { get; set; }
+
+		[DisplayName("Structure Status")]
+		[MaxLength(500)]
+		public string StructureStatus { get; set; }
+
 		[MaxLength(5000)]
 		[DataType(DataType.MultilineText)]
 		public string Description { get; set; }

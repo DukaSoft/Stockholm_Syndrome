@@ -46,7 +46,18 @@
 						</div>
 						<div class="col-md-6">
 							@*Tags*@
-							<h6>Tags - Comming soon™</h6>
+							@*<h6>Tags - Comming soon™</h6>*@
+							@*<h5 class="d-inline"><span class=" badge badge-pill badge-secondary">@item.OpStatus</span></h5>*@
+							<h5 class="d-inline">@item.OpStatus</h5>
+							@if (item.StructureStatus != "N/A" && item.StructureStatus != null)
+							{
+								<h6 class="d-inline">- @item.StructureType</h6>
+								<h6 class="d-inline">- @item.StructureStatus</h6>
+								<h6 class="d-inline">- @item.StructureLayer</h6>
+								<br />
+								<h6 class="d-inline">@item.StructureName</h6>
+								<h6 class="d-inline">- @item.StructureOwner</h6>
+							}
 						</div>
 					</div>
 					<div class="row">

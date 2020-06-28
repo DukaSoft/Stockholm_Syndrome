@@ -34,7 +34,17 @@
 			</div>
 			<div class="col-md-5">
 				@*Tags*@
-				<h6>Tags - Comming soon™</h6>
+				@*<h6>Tags - Comming soon™</h6>*@
+				<h5 class="d-inline">@Model.Ops.OpStatus</h5>
+				@if (Model.Ops.StructureStatus != "N/A" && Model.Ops.StructureStatus != null)
+				{
+					<h6 class="d-inline">- @Model.Ops.StructureType</h6>
+					<h6 class="d-inline">- @Model.Ops.StructureStatus</h6>
+					<h6 class="d-inline">- @Model.Ops.StructureLayer</h6>
+					<br />
+					<h6 class="d-inline">@Model.Ops.StructureName</h6>
+					<h6 class="d-inline">- @Model.Ops.StructureOwner</h6>
+				}
 			</div>
 			<div class="col-md-1">
 				<h6 class="text-right">Ops ID: @Model.Ops.Id</h6>

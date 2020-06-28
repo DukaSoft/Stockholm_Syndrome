@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Core;
 using Stockholm_Syndrome_Web.Data;
+using Stockholm_Syndrome_Web.Models;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations
 {
@@ -32,6 +33,13 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
 
         public List<SelectListItem> FCs { get; set; }
 
+        public List<SelectListItem> OpsStatus { get; set; }
+
+        public List<SelectListItem> StructureLayer { get; set; }
+
+        public List<SelectListItem> StructureType { get; set; }
+
+        public List<SelectListItem> StructureStatus { get; set; }
 
         static bool allowEdit = false;
 
@@ -139,6 +147,59 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
 			{
                 FCs.Insert(0, new SelectListItem("TBD", "TBD"));
 			}
+
+            OpsStatus = new List<SelectListItem>();
+            foreach (var opsStatus in OpsHelper.OpsStatus)
+            {
+                var item = new SelectListItem();
+                item.Text = opsStatus;
+                item.Value = opsStatus;
+                if (opsStatus == Ops.OpStatus)
+                {
+                    item.Selected = true;
+                }
+                OpsStatus.Add(item);
+            }
+
+            StructureLayer = new List<SelectListItem>();
+            foreach (var structureLayer in OpsHelper.StructureLayer)
+            {
+                var item = new SelectListItem();
+                item.Text = structureLayer;
+                item.Value = structureLayer;
+                if(structureLayer == Ops.StructureLayer)
+				{
+                    item.Selected = true;
+				}
+                StructureLayer.Add(item);
+            }
+
+            StructureType = new List<SelectListItem>();
+            foreach (var structureType in OpsHelper.StructureType)
+            {
+                var item = new SelectListItem();
+                item.Text = structureType;
+                item.Value = structureType;
+                if(structureType == Ops.StructureType)
+				{
+                    item.Selected = true;
+				}
+                StructureType.Add(item);
+
+            }
+
+            StructureStatus = new List<SelectListItem>();
+            foreach (var structureStatus in OpsHelper.StructureStatus)
+            {
+                var item = new SelectListItem();
+                item.Text = structureStatus;
+                item.Value = structureStatus;
+                if(structureStatus == Ops.StructureStatus)
+				{
+                    item.Selected = true;
+				}
+                StructureStatus.Add(item);
+            }
 
             return Page();
         }
