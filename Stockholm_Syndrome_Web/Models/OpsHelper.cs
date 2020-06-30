@@ -38,6 +38,7 @@ namespace Stockholm_Syndrome_Web.Models
 			"Azbel",
 			"Fortizar",
 			"Keepstar",
+			"Raitaru",
 			"Sotiyo",
 			"Tatara",
 			"Customs Office"
