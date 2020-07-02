@@ -77,7 +77,7 @@ namespace Stockholm_Syndrome_Web.Helpers
 			using (var wc = new WebClient())
 			{
 				string StructureUrl = $"https://esi.evetech.net/latest/corporations/{corp.CorpId}/structures/";
-				string StructureNameUrl = $"https://esi.evetech.net/dev/universe/structures/";
+				string StructureNameUrl = $"https://esi.evetech.net/latest/universe/structures/";
 				
 				wc.Headers.Add(HttpRequestHeader.Authorization, "Bearer " + corp.AccessToken);
 
