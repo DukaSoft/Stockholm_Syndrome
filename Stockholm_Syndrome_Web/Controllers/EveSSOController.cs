@@ -90,7 +90,7 @@ namespace Stockholm_Syndrome_Web.Controllers
 			// Create Redirect URL
 			var authUrl = _client.GetAuthenticationUrl(new Uri("https://login.eveonline.com/v2/oauth/authorize"),
 				_configCorp.Value.ClientId,
-				"esi-universe.read_structures.v1 esi-corporations.read_structures.v1 esi-industry.read_corporation_mining.v1",
+				"esi-universe.read_structures.v1 esi-corporations.read_structures.v1 esi-industry.read_corporation_mining.v1 esi-characters.read_notifications.v1",
 				_configCorp.Value.OurCallbackUrl,
 				"SSOAddCorp");
 
