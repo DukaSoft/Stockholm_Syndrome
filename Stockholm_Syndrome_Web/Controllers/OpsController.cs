@@ -34,7 +34,9 @@ namespace Stockholm_Syndrome_Web.Controllers
 				return NotFound();
 			}
 
-			var ops = await _context.Ops.Include(c => c.Creator).Include(t => t.OpTags).Include(p => p.Participants).ToListAsync();
+			var ExpireTime = DateTime.UtcNow.AddMinutes(20);
+
+			var ops = await _context.Ops.Include(c => c.Creator).Include(t => t.OpTags).Where(d => d.OpsTime > ExpireTime).ToListAsync();
 			List<ApiOpsModel> apiOpsModel = new List<ApiOpsModel>();
 
 			foreach (var op in ops)
