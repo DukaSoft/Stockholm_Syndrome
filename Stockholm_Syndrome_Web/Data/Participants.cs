@@ -14,8 +14,6 @@ namespace Stockholm_Syndrome_Web.Data
 
 		public Ops Ops { get; set; }
 
-		public Participation Answer { get; set; } = Participation.NoAnswer;
-
-		public ApplicationUser User { get; set; }
+		public int CharacterId { get; set; }
 	}
 }
