@@ -1,0 +1,102 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.Operations.CompletedModel
+@{
+	ViewData["Title"] = "Operations - ";
+}
+<h2 class="text-center m-4">Operations</h2>
+
+<div class="mx-md-5">
+	@{
+		if (User.IsInRole("OpsManager") || User.IsInRole("OpsCreate"))
+		{
+			<div class="text-center my-4">
+				<a asp-page="Create" class="btn btn-primary">Create New</a>
+			</div>
+		}
+	}
+	@{
+		int i = 0;
+		foreach (var item in Model.Ops)
+		{
+			<div class="border-fancy border-fancy-list mx-md-5 mx-sm-0 my-md-1 p-2">
+				<a asp-page="Details" asp-route-id="@item.Id">
+					<div class="row">
+						@*Times*@
+						<div class="col-md-3">
+							<div class="row">
+								<div class="col">
+									<h6>EvE Time</h6>
+								</div>
+								<div class="col">
+									<h6 class="EvETime">@item.OpsTime.ToString("yyyy/MM/dd HH:mm:ss")</h6>
+								</div>
+							</div>
+							<div class="row mb-2">
+								<div class="col">
+									<h6>Local Time</h6>
+								</div>
+								<div class="col">
+									<h6 id="@i">Calculating Local Time</h6>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 ">
+							@*Countdown*@
+							<h4 class="text-center" id="@i cd">Expired</h4>
+						</div>
+						<div class="col-md-6">
+							@*Tags*@
+							<h5 class="d-inline">@item.OpStatus</h5>
+							@if (item.StructureStatus != "N/A" && item.StructureStatus != null)
+							{
+								<h6 class="d-inline">- @item.StructureType</h6>
+								<h6 class="d-inline">- @item.StructureStatus</h6>
+								<h6 class="d-inline">- @item.StructureLayer</h6>
+								<br />
+								<h6 class="d-inline">@item.StructureName</h6>
+								<h6 class="d-inline">- @item.StructureOwner</h6>
+							}
+						</div>
+					</div>
+					<div class="row">
+						@*Systems*@
+						<div class="col-md-3">
+							<div class="row">
+								<div class="col">
+									<h6>Staging System</h6>
+								</div>
+								<div class="col">
+									<h6>@item.StagingSystemName</h6>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<h6>Target System</h6>
+								</div>
+								<div class="col">
+									<h6>@item.TargetSystemName</h6>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							@*FC*@
+							<h6>FC</h6>
+							<h6>@item.FcName</h6>
+						</div>
+						<div class="col-md-5">
+							@*Description*@
+							<h6>Description</h6>
+							<h6 class="multiline">@item.Description</h6>
+						</div>
+						<div class="col-md-2">
+							<h6 class="text-right">Creator</h6>
+							<h6 class="text-right">@await Model.Creator(item.Id)</h6>
+						</div>
+					</div>
+				</a>
+			</div>
+			i++;
+		}
+	}
+</div>
+<script src="~/js/LocalTime.js"></script>
