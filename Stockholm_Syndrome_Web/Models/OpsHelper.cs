@@ -27,7 +27,8 @@ namespace Stockholm_Syndrome_Web.Models
 			"N/A",
 			"Online",
 			"Low Power",
-			"Abandoned"
+			"Abandoned",
+			"Anchoring"
 		};
 
 		public static List<string> StructureType = new List<string>()
