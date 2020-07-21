@@ -17,6 +17,7 @@ using Stockholm_Syndrome_Web.Models;
 namespace Stockholm_Syndrome_Web.Pages.Operations
 {
     [Authorize(Roles = "OpsCreate,OpsManager")]
+    [ValidateAntiForgeryToken]
     public class CreateModel : PageModel
     {
         private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;

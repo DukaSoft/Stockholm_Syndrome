@@ -14,6 +14,7 @@ using Stockholm_Syndrome_Web.Data;
 namespace Stockholm_Syndrome_Web.Pages.Operations
 {
     [Authorize(Roles = "OpsCreate,OpsManager")]
+    [ValidateAntiForgeryToken]
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;
