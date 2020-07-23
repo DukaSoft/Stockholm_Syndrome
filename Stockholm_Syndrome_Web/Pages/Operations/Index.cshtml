@@ -3,17 +3,25 @@
 @{
 	ViewData["Title"] = "Operations - ";
 }
-<h2 class="text-center m-4">Scheduled Operations</h2>
+<div class="row justify-content-center my-4">
 
+	<div class="col-md-5">
+
+			<h2 class="text-center my-2">Scheduled Operations</h2>
+
+			@{
+				if (User.IsInRole("OpsManager") || User.IsInRole("OpsCreate"))
+				{
+					<div class="text-center my-4">
+						<a asp-page="Create" class="btn btn-primary mr-4">Create New</a>
+						<a asp-page="Completed" class="btn btn-primary">View Expired</a>
+					</div>
+				}
+			}
+
+	</div>
+</div>
 <div class="mx-md-5">
-	@{
-		if (User.IsInRole("OpsManager") || User.IsInRole("OpsCreate"))
-		{
-			<div class="text-center my-4">
-				<a asp-page="Create" class="btn btn-primary">Create New</a>
-			</div>
-		}
-	}
 	@{
 		int i = 0;
 		foreach (var item in Model.Ops)
