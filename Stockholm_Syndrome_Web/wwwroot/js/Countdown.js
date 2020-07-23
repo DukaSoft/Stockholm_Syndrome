@@ -9,6 +9,9 @@ function updateCountdown() {
 
     for (var i = 0; i < EveTimes.length; i++) {
         var cd = document.getElementById(i + " cd");
+        if (cd.innerHTML == "Expired!") {
+            continue;
+		}
 
         var eveTime = Date.parse(EveTimes[i].innerText);
 
@@ -34,6 +37,9 @@ function updateCountdown() {
         } else if (days == 0) {
             countdown = hours + ":" + minutes + ":" + seconds;
         }
+        if (countdown == "") {
+            countdown = "Expired!"
+		}
         cd.innerHTML = countdown;
     };
 }
