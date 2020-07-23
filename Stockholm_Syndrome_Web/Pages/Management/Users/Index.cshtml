@@ -1,44 +1,56 @@
 ﻿@page
 @model Stockholm_Syndrome_Web.Pages.Management.Users.IndexModel
 @{
-    ViewData["Title"] = "User Management -";
+	ViewData["Title"] = "User Management -";
 }
 
 <h2 class="text-center m-4">User Management</h2>
 <div class="row justify-content-md-center mt-5">
-    <div class="col-md-6 border-fancy">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Default Character</th>
-                    <th>Roles</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.userRoles)
-                {
-                    <tr>
-                        <td>
-                            @item.UserName
-                        </td>
-                        <td>
-                            @item.EveCharacter
-                        </td>
-                        <td>
-                            @foreach (var role in item.Roles)
-                            {
-                                <text>@role</text>
-                            }
+	<div class="col-md-6 border-fancy">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Username</th>
+					<th>Default Character</th>
+					<th>Roles</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.userRoles)
+				{
+					<tr>
+						<td>
+							@item.UserName
+						</td>
+						<td>
+							@item.EveCharacter
+						</td>
+						<td>
+							@if (item.Roles.Count > 1)
+							{
+								@foreach (var role in item.Roles)
+								{
+									<div data-toggle="tooltip" data-placement="top" title=@Model.RoleDescription(role).Replace(" ", "\u2800")>
+										@await Model.RoleName(role), 
+									</div>
+								}
+							}
+							else
+							{
+								@foreach (var role in item.Roles)
+								{
+									<text>@await Model.RoleName(role)</text>
+								}
+							}
 
-                        </td>
-                        <td>
-                            <a asp-page="./Edit" asp-route-id="@item.UserId">Edit</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+						</td>
+						<td>
+							<a asp-page="./Edit" asp-route-id="@item.UserId">Edit</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>
