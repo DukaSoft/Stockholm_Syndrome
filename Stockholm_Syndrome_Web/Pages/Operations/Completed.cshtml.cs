@@ -24,7 +24,7 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
 
 		public async Task OnGetAsync()
 		{
-			Ops = await _context.Ops.OrderBy(d => d.OpsTime).Where(t => t.OpsTime < DateTime.UtcNow).ToListAsync();
+			Ops = await _context.Ops.OrderByDescending(d => d.OpsTime).Where(t => t.OpsTime < DateTime.UtcNow).ToListAsync();
 		}
 
 		public async Task<string> Creator(int id)
