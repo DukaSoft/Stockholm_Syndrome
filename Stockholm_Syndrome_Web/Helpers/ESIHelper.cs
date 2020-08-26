@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Serilog;
 using Stockholm_Syndrome_Web.Data;
 using Stockholm_Syndrome_Web.Models;
 using System;
@@ -92,7 +93,14 @@ namespace Stockholm_Syndrome_Web.Helpers
 					Structure structure = new Structure();
 					structure.FuelExpires = Structure.fuel_expires;
 					structure.StructureId = Structure.structure_id;
-					result = wc.DownloadString(StructureNameUrl + structure.StructureId);
+					try
+					{
+						result = wc.DownloadString(StructureNameUrl + structure.StructureId);
+					}
+					catch(WebException e)
+					{
+						Log.Warning(e.Message);
+					}
 					var structureNameData = JsonConvert.DeserializeObject<dynamic>(result);
 
 					structure.StructureName = structureNameData.name;
