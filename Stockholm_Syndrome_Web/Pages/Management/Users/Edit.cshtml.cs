@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -25,6 +26,8 @@ namespace Stockholm_Syndrome_Web.Pages.Management.Users
             _context = context;
             userRoleHelper = new UserRoleHelper(_context);
             applicationRoles = userRoleHelper.GetRoles();
+
+            RoleItems = new List<RoleItem>();
         }
 
         [BindProperty]
@@ -32,6 +35,17 @@ namespace Stockholm_Syndrome_Web.Pages.Management.Users
 
         public UserRoles _userRoles { get; set; }
         public List<ApplicationRole> applicationRoles { get; set; }
+
+        public List<RoleItem> RoleItems { get; set; }
+
+        public class RoleItem
+        {
+            public int RoleId;
+            public string RoleName;
+            public bool IsChecked;
+            public bool IsManaged;
+        }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -46,10 +60,29 @@ namespace Stockholm_Syndrome_Web.Pages.Management.Users
             {
                 return NotFound();
             }
-
             
             _userRoles = userRoleHelper.GetRoles(ApplicationUser.Id);
-            
+
+            foreach (var role in applicationRoles)
+            {
+                RoleItem roleItem = new RoleItem();
+
+                roleItem.RoleId = role.Id;
+                roleItem.RoleName = role.Name;
+                roleItem.IsManaged = role.AutoManaged;
+
+                if(_userRoles.Roles.Contains(role.Id))
+				{
+                    roleItem.IsChecked = true;
+				}
+				else
+				{
+                    roleItem.IsChecked = false;
+                }
+                   
+                RoleItems.Add(roleItem);
+            }
+
             return Page();
         }
 
@@ -57,10 +90,10 @@ namespace Stockholm_Syndrome_Web.Pages.Management.Users
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             //_context.Attach(ApplicationUser).State = EntityState.Modified;
 

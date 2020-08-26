@@ -12,6 +12,8 @@ namespace Stockholm_Syndrome_Web.Data
 		[MaxLength(2000)]
 		public string Description { get; set; }
 
+		public bool AutoManaged { get; set; }
+
 		public ApplicationRole() { }
 
 		public ApplicationRole(string name)
