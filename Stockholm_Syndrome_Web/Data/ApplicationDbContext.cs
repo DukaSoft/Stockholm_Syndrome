@@ -15,6 +15,7 @@ namespace Stockholm_Syndrome_Web.Data
 
 		public DbSet<Corp> Alliance { get; set; }
 		public DbSet<EveCharacter> EveCharacters { get; set; }
+		public DbSet<EveGuide> EveGuides { get; set; }
 		public DbSet<Ops> Ops { get; set; }
 		public DbSet<OpsTag> Tags { get; set; }
 		public DbSet<Structure> Structures { get; set; }
