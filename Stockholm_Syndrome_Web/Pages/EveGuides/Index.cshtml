@@ -22,17 +22,16 @@
 						{
 							<tr>
 								<td class="align-middle">
-									<a asp-page="Details" asp-route-id="@guide.Id">
-										@guide.Title
-									</a>
+									@guide.Title
 								</td>
 								<td class="align-middle">
 									@guide.Description
 								</td>
 								<td class="text-right">
-									@if(User.IsInRole("OpsCreate") || User.IsInRole("OpsManager"))
+									<a class="btn btn-sm btn-primary mr-2" asp-page="Details" asp-route-id="@guide.Id">View</a>
+									@if (User.IsInRole("OpsCreate") || User.IsInRole("OpsManager"))
 									{
-										<a asp-page="Edit" asp-route-id="@guide.Id" class="btn btn-sm btn-primary mr-2">Edit</a>  <a asp-page="Delete" asp-route-id="@guide.Id" class="btn btn-sm btn-danger">Delete</a>
+										<a asp-page="Edit" asp-route-id="@guide.Id" class="btn btn-sm btn-primary mr-2">Edit</a> <a asp-page="Delete" asp-route-id="@guide.Id" class="btn btn-sm btn-danger">Delete</a>
 									}
 								</td>
 							</tr>
