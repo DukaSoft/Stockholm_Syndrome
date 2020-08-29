@@ -25,6 +25,9 @@
 								<a class="nav-link btn btn-link" asp-area="" asp-page="/Operations/Index">Operations</a>
 							</li>
 							<li class="nav-item">
+								<a class="nav-link btn btn-link" asp-area="" asp-page="/EveGuides/Index">Guides</a>
+							</li>
+							<li class="nav-item">
 								@if (User.IsInRole("FuelAdmin") || User.IsInRole("FuelManager"))
 								{
 									<a class="nav-link btn btn-link" asp-area="" asp-page="/StructureManagement/FuelLevels">Structure Fuel</a>
