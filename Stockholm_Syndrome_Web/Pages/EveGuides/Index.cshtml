@@ -1,0 +1,86 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.EveGuides.IndexModel
+
+
+<h2 class="text-center m-4">Eve Guides</h2>
+
+<div class="container">
+	<div class="row justify-content-md-center">
+		<div class="col-md-8 border-fancy mx-md-1 mx-sm-0 my-md-1 p-2">
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="align-middle">Name</th>
+						<th class="align-middle">Description</th>
+						@if(User.IsInRole("OpsManager"))
+						{
+							<th class="text-right"><a asp-page="Create" class="btn btn-primary">New</a></th>
+						}
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var guide in Model.EveGuides)
+					{
+						<tr>
+							<td class="align-middle">
+								@guide.Title
+							</td>
+							<td class="align-middle">
+								@guide.Description
+							</td>
+							<td class="text-right">
+								<a class="btn btn-sm btn-primary mr-2" asp-page="Details" asp-route-id="@guide.Id">View</a>
+								@if (User.IsInRole("OpsManager"))
+								{
+									<a asp-page="Edit" asp-route-id="@guide.Id" class="btn btn-sm btn-primary mr-2">Edit</a> <a asp-page="Delete" asp-route-id="@guide.Id" class="btn btn-sm btn-danger">Delete</a>
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+@*<p>
+		<a asp-page="Create">Create New</a>
+	</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.EveGuides[0].Title)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EveGuides[0].Description)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EveGuides[0].Src)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+	@foreach (var item in Model.EveGuides) {
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Description)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Src)
+				</td>
+				<td>
+					<a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+					<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+					<a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
+			</tr>
+	}
+		</tbody>
+	</table>*@

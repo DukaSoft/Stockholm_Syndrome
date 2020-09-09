@@ -1,0 +1,42 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.EveGuides.CreateModel
+
+<h2 class="text-center m-4">EveGuides</h2>
+
+<div class="container">
+	<form method="post">
+		<div class="row mx-md-5  justify-content-md-center">
+			<div class="col-5 p-4 border-fancy">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<div class="form-group">
+					<label asp-for="EveGuides.Title" class="control-label"></label>
+					<input asp-for="EveGuides.Title" class="form-control" />
+					<span asp-validation-for="EveGuides.Title" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="EveGuides.Description" class="control-label"></label>
+					<input asp-for="EveGuides.Description" class="form-control" />
+					<span asp-validation-for="EveGuides.Description" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="EveGuides.Src" class="control-label"></label>
+					<input asp-for="EveGuides.Src" class="form-control" />
+					<span asp-validation-for="EveGuides.Src" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+		<div class="row mx-md-5 justify-content-center">
+			<div class="col-5 border-fancy">
+				<div class="form-group">
+					<input type="submit" value="Create" class="btn btn-success mt-3 mx-3" style="width:200px" />
+					<a class="btn btn-primary mt-3 mx-3" asp-page="Index" style="width:110px">Back</a>
+				</div>
+			</div>
+		</div>
+
+	</form>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

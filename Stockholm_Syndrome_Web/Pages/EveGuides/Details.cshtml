@@ -1,0 +1,18 @@
+﻿@page
+@model Stockholm_Syndrome_Web.Pages.EveGuides.DetailsModel
+
+<div class="row justify-content-center my-4">
+
+	<div class="col-md-7">
+
+		<h2 class="text-center my-2">@Model.EveGuides.Title</h2>
+		<div class="text-center border-fancy">
+			<hr />
+			<iframe src="@Model.EveGuides.Src"
+					style="border-style: none; width:90%; height:580px"></iframe>
+			<div>
+				<a class="btn btn-primary my-4" asp-page="./Index">Back</a>
+			</div>
+		</div>
+	</div>
+</div>
