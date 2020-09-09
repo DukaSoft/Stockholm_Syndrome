@@ -10,7 +10,7 @@ using Stockholm_Syndrome_Web.Data;
 
 namespace Stockholm_Syndrome_Web.Pages.EveGuides
 {
-    [Authorize(Roles = "OpsCreate,OpsManager")]
+    [Authorize(Roles = "OpsManager")]
     public class CreateModel : PageModel
     {
         private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
