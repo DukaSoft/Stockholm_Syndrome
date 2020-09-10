@@ -31,6 +31,10 @@ namespace Stockholm_Syndrome_Web.Data
 		[MaxLength(2000)]
 		public string CharacterAllianceName { get; set; }
 
+		[Display(Name ="ESI Scope")]
+		[MaxLength(2000)]
+		public string ESIScope { get; set; }
+
 		[Display(Name = "Refresh Token")]
 		[MaxLength(2000)]
 		public string CharacterRefreshToken { get; set; }
