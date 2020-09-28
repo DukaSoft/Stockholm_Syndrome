@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ESIHelperLibrary;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Serilog;
 using Stockholm_Syndrome_Web.Data;
-using Stockholm_Syndrome_Web.Helpers;
 using Stockholm_Syndrome_Web.Models;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations

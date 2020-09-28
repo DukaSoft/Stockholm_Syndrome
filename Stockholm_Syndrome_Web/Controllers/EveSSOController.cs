@@ -15,7 +15,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
-using Stockholm_Syndrome_Web.Helpers;
+using ESIHelperLibrary;
 
 namespace Stockholm_Syndrome_Web.Controllers
 {

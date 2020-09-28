@@ -62,7 +62,7 @@
 						@Html.DisplayFor(modelItem => item.CharacterCorpName)
 					</td>
 					<td>
-						@if (item.ESIScope != Stockholm_Syndrome_Web.Helpers.ESIHelper.CurrentESIScopeForUsers)
+						@if (item.ESIScope != ESIHelperLibrary.ESIHelper.CurrentESIScopeForUsers)
 						{
 							<span class="text-danger text-center">Your character scope needs to be updated</span>
 							<br />

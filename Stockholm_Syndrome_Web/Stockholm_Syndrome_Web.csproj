@@ -36,4 +36,8 @@
     <Folder Include="Pages\StructureManagement\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ESIHelperLibrary\ESIHelperLibrary.csproj" />
+  </ItemGroup>
+
 </Project>
