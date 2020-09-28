@@ -287,6 +287,7 @@ namespace Stockholm_Syndrome_Web.Pages.StructureManagement
 
 			//	//character = JsonConvert.DeserializeObject<SSOCharacter>(response);
 			//}
+			await Task.CompletedTask;
 
 			return Redirect("/StructureManagement/FuelLevels");
 		}

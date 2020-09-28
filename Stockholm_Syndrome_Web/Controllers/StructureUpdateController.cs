@@ -59,13 +59,14 @@ namespace Stockholm_Syndrome_Web.Controllers
 				_configCorp.Value.ClientId, _configCorp.Value.ClientSecret, corp.RefreshToken).ConfigureAwait(false);
 
 			corp.AccessToken = refresh.AccessToken;
-			// Get the structure list
-			List<Structure> structures = new List<Structure>();
-			structures = ESIHelper.GetStructures(corp);
 
-			// compare list <=> Database
+			// ESI Structure List		
+			List<Structure> structures = ESIStructureHelper.GetStructures(corp);
+
+			// Database Structure List
 			List<Structure> ListOfStructures = _dbContext.Structures.ToList();
 
+			// Compare our List and the ESI List
 			foreach(var structure in structures)
 			{
 				bool found = false;

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Stockholm_Syndrome_Web.Helpers
+namespace ESIHelperLibrary
 {
-	public class OpsHelper
+	public static class OpsHelper
 	{
 		public static List<string> OpsStatus = new List<string>()
 		{
@@ -44,13 +43,5 @@ namespace Stockholm_Syndrome_Web.Helpers
 			"Tatara",
 			"Customs Office"
 		};
-	}
-
-	public enum Participation
-	{
-		NoAnswer = 0,
-		Accepted = 1,
-		Rejected = 2,
-		Maybe = 3
 	}
 }
