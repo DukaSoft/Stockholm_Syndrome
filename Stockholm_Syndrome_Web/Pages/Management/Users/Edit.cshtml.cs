@@ -112,6 +112,7 @@ namespace Stockholm_Syndrome_Web.Pages.Management.Users
             //        throw;
             //    }
             //}
+            await Task.CompletedTask;
 
             return RedirectToPage("./Index");
         }

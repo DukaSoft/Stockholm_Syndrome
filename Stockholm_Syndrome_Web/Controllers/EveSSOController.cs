@@ -15,6 +15,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
+using ESIHelperLibrary;
 
 namespace Stockholm_Syndrome_Web.Controllers
 {
@@ -58,7 +59,7 @@ namespace Stockholm_Syndrome_Web.Controllers
 			// Create Redirect URL
 			var authURL = _client.GetAuthenticationUrl(new Uri("https://login.eveonline.com/v2/oauth/authorize"),
 				_config.Value.ClientId,
-				"publicData esi-skills.read_skills.v1 esi-ui.write_waypoint.v1 esi-fittings.read_fittings.v1 esi-fittings.write_fittings.v1",
+				ESIHelper.CurrentESIScopeForUsers,
 				_config.Value.OurCallbackUrl,
 				"SSOLogin");
 
@@ -90,7 +91,7 @@ namespace Stockholm_Syndrome_Web.Controllers
 			// Create Redirect URL
 			var authUrl = _client.GetAuthenticationUrl(new Uri("https://login.eveonline.com/v2/oauth/authorize"),
 				_configCorp.Value.ClientId,
-				"esi-universe.read_structures.v1 esi-corporations.read_structures.v1 esi-industry.read_corporation_mining.v1 esi-characters.read_notifications.v1",
+				ESIHelper.CurrentESIScopeForCorp,
 				_configCorp.Value.OurCallbackUrl,
 				"SSOAddCorp");
 
@@ -228,8 +229,6 @@ namespace Stockholm_Syndrome_Web.Controllers
 					Log.Warning(new Exception("User was null"), $"The user was null for {character.CharacterName}", User);
 					return false;
 				}
-				// ToDo: If the EveCharacter is already on the list
-				//       And the user is the same, update it.
 				
 				var ch = new EveCharacter
 				{
@@ -237,6 +236,7 @@ namespace Stockholm_Syndrome_Web.Controllers
 					CharacterId = character.CharacterId,
 					CharacterName = character.CharacterName,
 					DefaultToon = false,
+					ESIScope = ESIHelper.CurrentESIScopeForUsers,
 					CharacterRefreshToken = tokens.RefreshToken
 				};
 
@@ -245,7 +245,18 @@ namespace Stockholm_Syndrome_Web.Controllers
 					ch.DefaultToon = true;
 				}
 
-				await _context.EveCharacters.AddAsync(ch);
+				var oldCharacter = await _context.EveCharacters.FirstOrDefaultAsync(c => c.CharacterId == ch.CharacterId);
+				if (oldCharacter != null)
+				{
+					// Eve Character is already in the system
+					oldCharacter.ESIScope = ESIHelper.CurrentESIScopeForUsers;
+					_context.EveCharacters.Update(oldCharacter);
+				}
+				else
+				{
+					await _context.EveCharacters.AddAsync(ch);
+				}
+
 				await _context.SaveChangesAsync();
 
 				await UpdateCorpIds(user);

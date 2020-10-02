@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stockholm_Syndrome_Web.Data;
 
 namespace Stockholm_Syndrome_Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200829130743_EveGuides")]
+    partial class EveGuides
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,9 +128,6 @@ namespace Stockholm_Syndrome_Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("AutoManaged")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -279,10 +278,6 @@ namespace Stockholm_Syndrome_Web.Migrations
 
                     b.Property<bool>("DefaultToon")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ESIScope")
-                        .HasColumnType("nvarchar(2000)")
-                        .HasMaxLength(2000);
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");

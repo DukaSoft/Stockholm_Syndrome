@@ -27,7 +27,7 @@
 					@Html.DisplayNameFor(model => model.EveCharacter[0].CharacterCorpName)
 				</th>
 				<th>
-					@Html.DisplayNameFor(model => model.EveCharacter[0].CharacterRefreshToken)
+					@Html.DisplayNameFor(model => model.EveCharacter[0].ESIScope)
 				</th>
 				@*<th>
 						@Html.DisplayNameFor(model => model.EveCharacter[0].DefaultToon)
@@ -62,7 +62,14 @@
 						@Html.DisplayFor(modelItem => item.CharacterCorpName)
 					</td>
 					<td>
-						@Html.DisplayFor(modelItem => item.CharacterRefreshToken)
+						@if (item.ESIScope != ESIHelperLibrary.ESIHelper.CurrentESIScopeForUsers)
+						{
+							<span class="text-danger text-center">Your character scope needs to be updated</span>
+							<br />
+							<a asp-controller="EveSSO" asp-action="Login" class="btn btn-success my-2" style="width:140px">Update now</a>
+							<br />
+						}
+						@Html.DisplayFor(modelItem => item.ESIScope)
 					</td>
 					@*<td>
 							@Html.DisplayFor(modelItem => item.DefaultToon)
