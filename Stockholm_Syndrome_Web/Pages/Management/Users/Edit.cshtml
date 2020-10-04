@@ -7,28 +7,47 @@
 <hr />
 <div class="row justify-content-center">
 	<div class="col-md-4 border-fancy py-2">
-		<h4 class="text-center">@Model.ApplicationUser.UserName</h4>
+		<h4 class="text-center">@Model.UserName</h4>
 
 		<div class="row justify-content-between mb-3">
-			<div class="col border-fancy mx-3">
-				<p class="text-primary text-center">Assigned</p>
-				@{
-					foreach (var role in Model._userRoles.Roles)
-					{
-						<p>@role</p>
+			<div class="col border-fancy mx-3 py-3">
+				<p class="text-primary text-center">Roles</p>
+				<form method="post">
+					@{
+						<input asp-for="UserId" hidden value="@Model.UserId" />
+						for (int i = 0; i < Model.applicationRoles.Count; i++)
+						{
+							@if (Model.RoleItems[i].RoleId == 1 || Model.RoleItems[i].IsManaged == true)
+							{
+								//<input type="checkbox" disabled asp-for="RoleItems[i].IsChecked">
+								<input name="AreChecked" asp-for="RoleItems[i].IsChecked" disabled type="checkbox" value="@Model.RoleItems[i].RoleId" /> @Model.RoleItems[i].RoleName<br />
+							}
+							else if (Model.RoleItems[i].RoleId == 2)
+							{
+								if (User.IsInRole("Admin"))
+								{
+									//<input type="checkbox" asp-for="RoleItems[i].IsChecked">
+									<input name="AreChecked" asp-for="RoleItems[i].IsChecked" type="checkbox" value="@Model.RoleItems[i].RoleId" /> @Model.RoleItems[i].RoleName<br />
+								}
+								else
+								{
+									//<input type="checkbox" disabled asp-for="RoleItems[i].IsChecked">
+									<input name="AreChecked" asp-for="RoleItems[i].IsChecked" disabled type="checkbox" value="@Model.RoleItems[i].RoleId" /> @Model.RoleItems[i].RoleName<br />
+								}
+							}
+							else
+							{
+								//<input type="checkbox" asp-for="RoleItems[i].IsChecked">
+								<input name="AreChecked" asp-for="RoleItems[i].IsChecked" type="checkbox" value="@Model.RoleItems[i].RoleId" /> @Model.RoleItems[i].RoleName<br />
+							}
+							//<label asp-for="RoleItems[i].RoleName">@Model.RoleItems[i].RoleName</label>
+
+
+							<br />
+						}
 					}
-				}
-			</div>
-			<div class="col border-fancy mx-3">
-				<p class="text-danger text-center">Avaliable</p>
-				@{
-					foreach (var role in Model.applicationRoles)
-					{
-						<div>
-							<p>↤ @role.Name</p>
-						</div>
-					}
-				}
+					<input type="submit" value="Save" class="btn btn-primary" />
+				</form>
 			</div>
 		</div>
 		<a asp-page="./Index">Back to List</a>
