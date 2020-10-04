@@ -29,11 +29,16 @@
 						<td>
 							@if (item.Roles.Count > 1)
 							{
-								@foreach (var role in item.Roles)
+								@for (int i = 0; i < item.Roles.Count; i++)
 								{
-									<div data-toggle="tooltip" data-placement="top" title=@Model.RoleDescription(role).Replace(" ", "\u2800")>
-										@await Model.RoleName(role), 
-									</div>
+									if (i == item.Roles.Count - 1)
+									{
+										@await Model.RoleName(item.Roles[i])
+									}
+									else
+									{
+										@await Model.RoleName(item.Roles[i])<text>, </text>
+									}
 								}
 							}
 							else

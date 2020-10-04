@@ -71,7 +71,7 @@ namespace Stockholm_Syndrome_Web.Pages.Management.Users
 		{
 			string roleDescription;
 
-			roleDescription = _context.Roles.FirstOrDefault(r => r.Id == roleId).Description;
+			roleDescription = _context.Roles.FirstOrDefault(r => r.Id == roleId).Description;//.Replace(" ", "\u2800");
 
 			return roleDescription;
 		}
