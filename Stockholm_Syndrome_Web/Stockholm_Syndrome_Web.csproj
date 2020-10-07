@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\**" />
     <Compile Remove="Keys\**" />
+    <Content Remove="Data\**" />
     <Content Remove="Keys\**" />
+    <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="Keys\**" />
+    <None Remove="Data\**" />
     <None Remove="Keys\**" />
   </ItemGroup>
 
@@ -33,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Pages\StructureManagement\" />
   </ItemGroup>
 
