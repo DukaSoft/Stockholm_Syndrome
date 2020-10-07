@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 
 namespace Stockholm_Syndrome_Web.Pages.AllianceManagement
 {
 	[Authorize(Roles = "Admin")]
 	public class AddCorpModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public AddCorpModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context)
+        public AddCorpModel(ApplicationDbContext context)
         {
             _context = context;
         }

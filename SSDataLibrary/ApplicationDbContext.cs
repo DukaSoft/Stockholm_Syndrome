@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Stockholm_Syndrome_Web.Data
+namespace SSDataLibrary
 {
 	public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
 	{

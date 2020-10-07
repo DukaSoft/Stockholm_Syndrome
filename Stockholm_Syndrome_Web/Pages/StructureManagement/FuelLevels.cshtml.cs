@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Stockholm_Syndrome_Web.Controllers;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 using Stockholm_Syndrome_Web.Models;
 
 namespace Stockholm_Syndrome_Web.Pages.StructureManagement
@@ -20,7 +20,7 @@ namespace Stockholm_Syndrome_Web.Pages.StructureManagement
 	[Authorize(Roles = "Admin,Director,FuelAdmin,FuelManager")]
 	public class StructureFuelLevelsModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 		private readonly IHttpClientFactory _httpClientFactory;
 		private readonly ISingleSignOnClient _client;
 		private readonly IOptions<SSOUserLogin> _configUser;
@@ -30,7 +30,7 @@ namespace Stockholm_Syndrome_Web.Pages.StructureManagement
 		// Set Destination
 		public List<EveCharacter> eveCharacters;
 
-		public StructureFuelLevelsModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context,
+		public StructureFuelLevelsModel(ApplicationDbContext context,
 									IHttpClientFactory clientFactory,
 									ISingleSignOnClient client,
 									IOptions<SSOUserLogin> configUser)

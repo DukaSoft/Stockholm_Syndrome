@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Stockholm_Syndrome_Web.Data;
 
 [assembly: HostingStartup(typeof(Stockholm_Syndrome_Web.Areas.Identity.IdentityHostingStartup))]
 namespace Stockholm_Syndrome_Web.Areas.Identity

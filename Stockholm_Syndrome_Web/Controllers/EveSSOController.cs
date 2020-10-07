@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 using Stockholm_Syndrome_Web.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;

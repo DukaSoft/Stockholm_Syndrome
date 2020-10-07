@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 using Microsoft.AspNetCore.Identity;
 
 namespace Stockholm_Syndrome_Web.Areas.Identity.Pages.Account

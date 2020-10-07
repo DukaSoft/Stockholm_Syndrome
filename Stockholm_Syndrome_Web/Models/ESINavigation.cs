@@ -1,7 +1,7 @@
 ﻿using EVE.SingleSignOn.Core;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;

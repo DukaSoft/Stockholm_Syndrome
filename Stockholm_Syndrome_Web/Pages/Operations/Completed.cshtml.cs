@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations
 {

@@ -7,16 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 
 namespace Stockholm_Syndrome_Web.Pages.StructureManagement
 {
 	[Authorize(Roles="Admin,Director")]
     public class EditStructureModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public EditStructureModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context)
+        public EditStructureModel(ApplicationDbContext context)
         {
             _context = context;
         }

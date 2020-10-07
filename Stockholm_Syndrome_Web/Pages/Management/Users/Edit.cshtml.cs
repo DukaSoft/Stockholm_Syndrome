@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 using Stockholm_Syndrome_Web.Helpers;
 using Stockholm_Syndrome_Web.Models;
 
@@ -19,13 +19,13 @@ namespace Stockholm_Syndrome_Web.Pages.Management.Users
     [Authorize(Roles = "Admin,Director")]
     public class EditModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 		private readonly Microsoft.AspNetCore.Identity.RoleManager<ApplicationRole> _roleManager;
 		private readonly UserManager<ApplicationUser> _userManager;
 
 		private UserRoleHelper userRoleHelper { get; set; }
 
-        public EditModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context, 
+        public EditModel(ApplicationDbContext context, 
             RoleManager<ApplicationRole> roleManager,
             UserManager<ApplicationUser> userManager)
         {

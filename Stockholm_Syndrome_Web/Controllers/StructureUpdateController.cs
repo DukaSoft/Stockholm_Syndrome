@@ -8,7 +8,7 @@ using EVE.SingleSignOn.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 using Stockholm_Syndrome_Web.Helpers;
 using Stockholm_Syndrome_Web.Models;
 
