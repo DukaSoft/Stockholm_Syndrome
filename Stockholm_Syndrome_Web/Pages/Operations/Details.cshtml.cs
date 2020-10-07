@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations
 {
     [Authorize(Roles = "MemberOfAlliance")]
     public class DetailsModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         public readonly UserManager<ApplicationUser> _userManager;
 
-        public DetailsModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public DetailsModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;

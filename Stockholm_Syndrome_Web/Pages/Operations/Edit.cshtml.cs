@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Core;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 using Stockholm_Syndrome_Web.Models;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations
@@ -19,10 +19,10 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
     [Authorize(Roles = "OpsCreate,OpsManager")]
     public class EditModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private UserManager<ApplicationUser> _userManager { get; set; }
 
-        public EditModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public EditModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;

@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Stockholm_Syndrome_Web.Data
+namespace SSDataLibrary
 {
 	public class Ops
 	{

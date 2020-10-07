@@ -7,16 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 
 namespace Stockholm_Syndrome_Web.Pages.AllianceManagement
 {
 	[Authorize(Roles = "Admin")]
 	public class EditCorpModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public EditCorpModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context)
+        public EditCorpModel(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Serilog;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 using Stockholm_Syndrome_Web.Models;
 
 namespace Stockholm_Syndrome_Web.Pages.Operations
@@ -20,10 +20,10 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
     [Authorize(Roles = "OpsCreate,OpsManager")]
     public class CreateModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private UserManager<ApplicationUser> _userManager { get; set; }
 
-        public CreateModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public CreateModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             Tags = _context.Tags.ToList();

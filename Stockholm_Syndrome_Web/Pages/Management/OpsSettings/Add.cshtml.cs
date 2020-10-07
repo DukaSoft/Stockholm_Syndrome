@@ -7,16 +7,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Stockholm_Syndrome_Web.Data;
+using SSDataLibrary;
 
 namespace Stockholm_Syndrome_Web.Pages.Management.OpsSettings
 {
     [Authorize(Roles = "Admin,Director")]
     public class AddModel : PageModel
     {
-        private readonly Stockholm_Syndrome_Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public AddModel(Stockholm_Syndrome_Web.Data.ApplicationDbContext context)
+        public AddModel(ApplicationDbContext context)
         {
             _context = context;
         }
