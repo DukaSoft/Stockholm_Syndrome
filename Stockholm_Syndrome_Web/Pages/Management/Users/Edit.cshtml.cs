@@ -124,6 +124,11 @@ namespace Stockholm_Syndrome_Web.Pages.Management.Users
 			{
                 if(AreChecked.Contains(role.Id))
 				{
+                    if (await _userManager.IsInRoleAsync(applicationUser, role.Name))
+                    {
+                        // User already has the role
+                        continue;
+                    }
                     await _userManager.AddToRoleAsync(applicationUser, role.Name);
 				}
                 else
