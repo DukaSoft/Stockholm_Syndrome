@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>d7572e4d-937a-4fec-89b8-a10db771d11b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,6 +10,11 @@
     <Content Remove="Keys\**" />
     <EmbeddedResource Remove="Keys\**" />
     <None Remove="Keys\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201011145232_test.cs" />
+    <Compile Remove="Migrations\20201011145232_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

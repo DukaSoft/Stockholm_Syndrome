@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Stockholm_Syndrome_Web.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
