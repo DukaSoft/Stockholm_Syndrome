@@ -53,7 +53,7 @@ namespace Stockholm_Syndrome_Web.Pages.Management.Users
 
             if (ApplicationUser != null)
             {
-                if(await _userManager.IsInRoleAsync(ApplicationUser, "Admin"))
+                if(await _userManager.IsInRoleAsync(ApplicationUser, "Admin") || await _userManager.IsInRoleAsync(ApplicationUser, "Director"))
 				{
                     return RedirectToPage("./Index");
                 }
