@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using SSDataLibrary;
+using Stockholm_Syndrome_Web.Data;
 
 namespace Stockholm_Syndrome_Web.Areas.Identity.Pages.Account.Manage
 {

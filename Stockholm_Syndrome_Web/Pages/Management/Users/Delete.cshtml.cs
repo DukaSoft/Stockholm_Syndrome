@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using SSDataLibrary;
+using Stockholm_Syndrome_Web.Data;
 
 namespace Stockholm_Syndrome_Web.Pages.Management.Users
 {
     [Authorize(Roles="Admin,Director")]
     public class DeleteModel : PageModel
     {
-        private readonly SSDataLibrary.ApplicationDbContext _context;
-        private readonly UserManager<SSDataLibrary.ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-		public DeleteModel(SSDataLibrary.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+		public DeleteModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
 		{
 			_context = context;
 			_userManager = userManager;

@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\**" />
     <Compile Remove="Keys\**" />
-    <Content Remove="Data\**" />
     <Content Remove="Keys\**" />
-    <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="Keys\**" />
-    <None Remove="Data\**" />
     <None Remove="Keys\**" />
   </ItemGroup>
 
@@ -42,7 +38,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ESIHelperLibrary\ESIHelperLibrary.csproj" />
-    <ProjectReference Include="..\SSDataLibrary\SSDataLibrary.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Stockholm_Syndrome_Web.Data;
 
-namespace SSDataLibrary
+namespace Stockholm_Syndrome_Web.Data
 {
 	public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
 	{

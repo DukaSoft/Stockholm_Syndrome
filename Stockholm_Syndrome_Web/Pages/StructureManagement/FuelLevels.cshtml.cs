@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Stockholm_Syndrome_Web.Controllers;
-using SSDataLibrary;
+using Stockholm_Syndrome_Web.Data;
 using Stockholm_Syndrome_Web.Models;
 
 namespace Stockholm_Syndrome_Web.Pages.StructureManagement

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Stockholm_Syndrome_Web.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SSDataLibrary
+namespace Stockholm_Syndrome_Web.Data
 {
 	public class ApplicationUser : IdentityUser<int>
 	{

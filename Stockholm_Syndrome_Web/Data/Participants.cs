@@ -4,14 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SSDataLibrary
+namespace Stockholm_Syndrome_Web.Data
 {
-	public class OpsTags
+	public class Participants
 	{
+		[Key]
 		public int Id { get; set; }
 
-		public OpsTag Tag { get; set; }
-
 		public Ops Ops { get; set; }
+
+		public int CharacterId { get; set; }
 	}
 }
