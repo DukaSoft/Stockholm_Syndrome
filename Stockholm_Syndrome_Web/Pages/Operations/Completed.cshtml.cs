@@ -30,13 +30,19 @@ namespace Stockholm_Syndrome_Web.Pages.Operations
 		public async Task<string> Creator(int id)
 		{
 			var ops = await _context.Ops.Include(u => u.Creator).ThenInclude(e => e.EveCharacter).FirstOrDefaultAsync(m => m.Id == id);
-			string creator = ops.Creator.DiscordName;
 
-			foreach (var character in ops.Creator.EveCharacter)
+			string creator = "";
+
+			if (ops.Creator != null)
 			{
-				if (character.DefaultToon == true)
+				creator = ops.Creator.DiscordName;
+
+				foreach (var character in ops.Creator.EveCharacter)
 				{
-					creator = character.CharacterName;
+					if (character.DefaultToon == true)
+					{
+						creator = character.CharacterName;
+					}
 				}
 			}
 
