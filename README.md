@@ -6,4 +6,4 @@ It use Discord for logins, and players are able to link their Eve Online toon to
 This is my first attempt at creating an ASP Website
 I had no experience with html/css or javascript when i started
 
-This Website is no longer active!
+# This Website is no longer active!
