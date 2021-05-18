@@ -54,8 +54,8 @@ namespace Stockholm_Syndrome_Web
 			services.AddAuthentication()
 				.AddDiscord(options =>
 				{
-					options.ClientId = "618390003940327424";
-					options.ClientSecret = "FDey9Rm8mgX4IstO9FF5no9kfhVG3kSN";
+					options.ClientId = "";
+					options.ClientSecret = "";
 					options.CallbackPath = "/Api/Discord";
 					options.SaveTokens = true;
 					options.Scope.Add("identify");
