@@ -20,3 +20,6 @@ Structure fuel info
 
 User management
 ![image](https://user-images.githubusercontent.com/43952666/170985791-8c6b901a-8a31-458b-8cff-549c56585abe.png)
+
+Eve Online character management
+![image](https://user-images.githubusercontent.com/43952666/170986055-92ab33eb-be16-4177-afec-aa6bbe43cfa3.png)
