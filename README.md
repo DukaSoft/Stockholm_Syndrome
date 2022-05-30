@@ -14,3 +14,6 @@ Create Operations
 
 And see scheduled operations with countdown timers
 ![image](https://user-images.githubusercontent.com/43952666/170985416-6ef95ed4-66a1-475f-b71a-ac03c9270aa4.png)
+
+Structure fuel info
+![image](https://user-images.githubusercontent.com/43952666/170985633-161a8579-73a3-4cc1-9055-246e5e1cfb9c.png)
